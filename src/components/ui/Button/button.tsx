@@ -1,15 +1,9 @@
 import clsx from "clsx";
+import Link from "next/link";
+import React from "react";
 import { forwardRef } from "react";
 
-interface ButtonProps {
-  children?: React.ReactNode;
-  isLoading?: boolean;
-  variant?: keyof typeof buttonColors;
-  className?: string;
-  onClick?: () => void;
-}
-
-const buttonColors = {
+export const buttonColors = {
   primary: "bg-blue hover:bg-blue-700 text-white",
   secondary: "bg-gray-500 hover:bg-gray-700 text-white",
   transparent:
@@ -23,26 +17,62 @@ const buttonColors = {
   disabled: "bg-gray-300 text-gray-800 cursor-not-allowed",
 };
 
+export type ButtonProps = {
+  children?: React.ReactNode;
+  isLoading?: boolean;
+  variant?: keyof typeof buttonColors;
+  className?: string;
+  onClick?: () => void;
+  href?: string;
+} & React.ComponentPropsWithoutRef<"button">;
+
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({
-    children,
-    variant = "primary",
-    isLoading,
-    onClick,
-    className,
-  }: ButtonProps) => {
+  (
+    {
+      children,
+      variant = "primary",
+      isLoading,
+      onClick,
+      className,
+      href,
+      ...rest
+    },
+    ref
+  ) => {
     return (
-      <button
-        disabled={isLoading}
-        onClick={onClick}
-        className={clsx([
-          "shadow-md rounded-md border px-4 py-2",
-          buttonColors[variant],
-          isLoading && buttonColors["disabled"],
-          className,
-        ])}>
-        {children}
-      </button>
+      <>
+        {href ? (
+          <Link href={href}>
+            <button
+              {...rest}
+              disabled={isLoading}
+              ref={ref}
+              onClick={onClick}
+              className={clsx([
+                "shadow-md rounded-md border px-4 py-2",
+                buttonColors[variant],
+                isLoading && buttonColors["disabled"],
+                className,
+              ])}>
+              {children}
+            </button>
+          </Link>
+        ) : (
+          <button
+            {...rest}
+            disabled={isLoading}
+            ref={ref}
+            onClick={onClick}
+            className={clsx([
+              "shadow-md rounded-md border px-4 py-2",
+              buttonColors[variant],
+              isLoading && buttonColors["disabled"],
+              className,
+            ])}>
+            {children}
+          </button>
+        )}
+      </>
     );
   }
 );
