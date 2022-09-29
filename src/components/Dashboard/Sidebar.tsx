@@ -16,6 +16,7 @@ import {
   SearchIcon,
   SelectorIcon,
 } from "@heroicons/react/solid/index";
+import { navigation, teams } from "@/data/dashboardData";
 
 interface SidebarProps {
   session: Session;
@@ -84,7 +85,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
                 <div className='mt-5 flex-1 h-0 overflow-y-auto'>
                   <nav className='px-2'>
                     <div className='space-y-1'>
-                      {/* {navigation.map((item) => (
+                      {navigation.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
@@ -106,7 +107,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
                           />
                           {item.name}
                         </a>
-                      ))} */}
+                      ))}
                     </div>
                     <div className='mt-8'>
                       <h3
@@ -118,7 +119,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
                         className='mt-1 space-y-1'
                         role='group'
                         aria-labelledby='mobile-teams-headline'>
-                        {/* {teams.map((team) => (
+                        {teams.map((team) => (
                           <a
                             key={team.name}
                             href={team.href}
@@ -132,7 +133,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
                             />
                             <span className='truncate'>{team.name}</span>
                           </a>
-                        ))} */}
+                        ))}
                       </div>
                     </div>
                   </nav>
@@ -312,7 +313,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
           {/* Navigation */}
           <nav className='px-3 mt-6'>
             <div className='space-y-1'>
-              {/* {navigation.map((item) => (
+              {navigation.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
@@ -334,7 +335,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
                   />
                   {item.name}
                 </a>
-              ))} */}
+              ))}
             </div>
             <div className='mt-8'>
               {/* Secondary navigation */}
@@ -347,7 +348,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
                 className='mt-1 space-y-1'
                 role='group'
                 aria-labelledby='desktop-teams-headline'>
-                {/* {teams.map((team) => (
+                {teams.map((team) => (
                   <a
                     key={team.name}
                     href={team.href}
@@ -361,7 +362,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
                     />
                     <span className='truncate'>{team.name}</span>
                   </a>
-                ))} */}
+                ))}
               </div>
             </div>
           </nav>

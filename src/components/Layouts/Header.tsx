@@ -11,20 +11,25 @@ function LandingPageHeader() {
       <nav className='flex justify-between items-center'>
         <span className='font-bold text-3xl'>
           Monitor.
-          <span className='text-blue-600 font-bold text-3xl'>it</span>
+          <span className='text-blue font-bold text-3xl'>it</span>
         </span>
         <div>
           {session ? (
             <div>
               <Button
                 onClick={() => router.push("/dashboard")}
-                variant='transparent'>
+                variant='transparent'
+                className='mx-2'>
                 Dashboard
               </Button>
-              <Button onClick={() => signOut()}>Sign out</Button>
+              <Button className='ml-2' onClick={() => signOut()}>
+                Sign out
+              </Button>
             </div>
           ) : (
-            <Button onClick={() => signIn("google")}>Login</Button>
+            <Button className='ml-2' onClick={() => signIn("google")}>
+              Login
+            </Button>
           )}
         </div>
       </nav>

@@ -1,4 +1,3 @@
-import { NextComponentType } from "next";
 import clsx from "clsx";
 import { forwardRef } from "react";
 
@@ -6,11 +5,12 @@ interface ButtonProps {
   children?: React.ReactNode;
   isLoading?: boolean;
   variant?: keyof typeof buttonColors;
+  className?: string;
   onClick?: () => void;
 }
 
 const buttonColors = {
-  primary: "bg-blue-500 hover:bg-blue-700 text-white",
+  primary: "bg-blue hover:bg-blue-700 text-white",
   secondary: "bg-gray-500 hover:bg-gray-700 text-white",
   transparent:
     "bg-transparent border-none shadow-none hover:shadow-md hover:border text-gray-700",
@@ -24,15 +24,22 @@ const buttonColors = {
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, variant = "primary", isLoading, onClick }: ButtonProps) => {
+  ({
+    children,
+    variant = "primary",
+    isLoading,
+    onClick,
+    className,
+  }: ButtonProps) => {
     return (
       <button
         disabled={isLoading}
         onClick={onClick}
         className={clsx([
-          "shadow-md rounded-md border px-4 py-2 mx-2",
+          "shadow-md rounded-md border px-4 py-2",
           buttonColors[variant],
           isLoading && buttonColors["disabled"],
+          className,
         ])}>
         {children}
       </button>

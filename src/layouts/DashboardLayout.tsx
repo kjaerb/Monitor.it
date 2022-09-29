@@ -1,11 +1,6 @@
 import { Fragment, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
-import {
-  ClockIcon,
-  HomeIcon,
-  MenuAlt1Icon,
-  ViewListIcon,
-} from "@heroicons/react/outline/index";
+import { Menu, Transition } from "@headlessui/react";
+import { MenuAlt1Icon } from "@heroicons/react/outline/index";
 import {
   ChevronRightIcon,
   DotsVerticalIcon,
@@ -15,56 +10,7 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Sidebar from "@/components/Dashboard/Sidebar";
-
-const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "My tasks", href: "#", icon: ViewListIcon, current: false },
-  { name: "Recent", href: "#", icon: ClockIcon, current: false },
-];
-const teams = [
-  { name: "Engineering", href: "#", bgColorClass: "bg-indigo-500" },
-  { name: "Human Resources", href: "#", bgColorClass: "bg-green-500" },
-  { name: "Customer Success", href: "#", bgColorClass: "bg-yellow-500" },
-];
-const projects = [
-  {
-    id: 1,
-    title: "GraphQL API",
-    initials: "GA",
-    team: "Engineering",
-    members: [
-      {
-        name: "Dries Vincent",
-        handle: "driesvincent",
-        imageUrl:
-          "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Lindsay Walton",
-        handle: "lindsaywalton",
-        imageUrl:
-          "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Courtney Henry",
-        handle: "courtneyhenry",
-        imageUrl:
-          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-      {
-        name: "Tom Cook",
-        handle: "tomcook",
-        imageUrl:
-          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      },
-    ],
-    totalMembers: 12,
-    lastUpdated: "March 17, 2020",
-    pinned: true,
-    bgColorClass: "bg-pink-600",
-  },
-];
-const pinnedProjects = projects.filter((project) => project.pinned);
+import { projects } from "@/data/dashboardData";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -77,6 +23,7 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   const { data: session } = useSession();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pinnedProjects = projects.filter((project) => project.pinned);
 
   if (!session) {
     return <h1>not logged in</h1>;
