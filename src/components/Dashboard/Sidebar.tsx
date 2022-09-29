@@ -3,20 +3,10 @@ import { Session } from "next-auth";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import {
-  ClockIcon,
-  HomeIcon,
-  MenuAlt1Icon,
-  ViewListIcon,
-  XIcon,
-} from "@heroicons/react/outline/index";
-import {
-  ChevronRightIcon,
-  DotsVerticalIcon,
-  SearchIcon,
-  SelectorIcon,
-} from "@heroicons/react/solid/index";
+import { XIcon } from "@heroicons/react/outline/index";
+import { SearchIcon, SelectorIcon } from "@heroicons/react/solid/index";
 import { navigation, teams } from "@/data/dashboardData";
+import AvatarImage from "../ui/Image/AvatarImage";
 
 interface SidebarProps {
   session: Session;
@@ -164,11 +154,7 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
               <Menu.Button className='group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500'>
                 <span className='flex w-full justify-between items-center'>
                   <span className='flex min-w-0 items-center justify-between space-x-3'>
-                    <img
-                      className='w-10 h-10 bg-gray-300 rounded-full flex-shrink-0'
-                      src={session.user?.image!}
-                      alt=''
-                    />
+                    <AvatarImage src={session.user?.image} />
                     <span className='flex-1 flex flex-col min-w-0'>
                       <span className='text-gray-900 text-sm font-medium truncate'>
                         {session.user?.name}

@@ -4,8 +4,9 @@ import React from "react";
 import { forwardRef } from "react";
 
 export const buttonColors = {
-  primary: "bg-blue hover:bg-blue-700 text-white",
+  primary: "bg-blue-600 hover:bg-blue-700 text-white",
   secondary: "bg-gray-500 hover:bg-gray-700 text-white",
+  ternary: "bg-blue-700 hover:bg-blue-800 text-white",
   transparent:
     "bg-transparent border-none shadow-none hover:shadow-md hover:border text-gray-700",
   danger: "bg-red-500 hover:bg-red-700 text-white",
@@ -49,7 +50,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               ref={ref}
               onClick={onClick}
               className={clsx([
-                "shadow-md rounded-md border px-4 py-2",
+                "shadow-md rounded-md px-4 py-2",
                 buttonColors[variant],
                 isLoading && buttonColors["disabled"],
                 className,
@@ -64,7 +65,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             ref={ref}
             onClick={onClick}
             className={clsx([
-              "shadow-md rounded-md border px-4 py-2",
+              "shadow-md rounded-md px-4 py-2",
               buttonColors[variant],
               isLoading && buttonColors["disabled"],
               className,
@@ -76,5 +77,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
+Button.displayName = "Button";
 
 export default Button;

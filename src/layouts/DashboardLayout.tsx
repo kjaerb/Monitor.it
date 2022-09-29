@@ -7,10 +7,10 @@ import {
   SearchIcon,
 } from "@heroicons/react/solid/index";
 import clsx from "clsx";
-import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import { projects } from "@/data/dashboardData";
+import AvatarImage from "@/components/ui/Image/AvatarImage";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -81,11 +81,7 @@ export default function DashboardLayout({
                   <div>
                     <Menu.Button className='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500'>
                       <span className='sr-only'>Open user menu</span>
-                      <img
-                        className='h-8 w-8 rounded-full'
-                        src={session.user?.image!}
-                        alt=''
-                      />
+                      <AvatarImage src={session.user?.image} />
                     </Menu.Button>
                   </div>
                   <Transition

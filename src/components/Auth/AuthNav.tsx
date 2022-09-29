@@ -1,7 +1,7 @@
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "../ui/Button/Button";
 import ButtonMenu from "../ui/Button/ButtonMenu";
-import { AvatarImage } from "../ui/Image/AvatarImage";
+import AvatarImage from "../ui/Image/AvatarImage";
 
 function AuthNav() {
   const { data: session } = useSession();
@@ -10,8 +10,11 @@ function AuthNav() {
     <div>
       {session ? (
         <>
-          <Button className='mx-2'>Dashboard</Button>
+          <Button href={"/dashboard"} className='mx-2'>
+            Dashboard
+          </Button>
           <ButtonMenu
+            className='py-1'
             items={[
               {
                 children: "Sign out",
@@ -19,11 +22,14 @@ function AuthNav() {
               },
             ]}>
             <span className='font-bold mr-2'>{session.user?.name} </span>
-            <AvatarImage src={session.user?.image!} />
+            <AvatarImage src={session.user?.image} width={30} height={30} />
           </ButtonMenu>
         </>
       ) : (
-        <Button href={"/login"}>Sign in</Button>
+        // <Button href={"/login"}>Sign in</Button>
+        <Button variant='ternary' onClick={() => signIn("google")}>
+          Sign in
+        </Button>
       )}
     </div>
   );

@@ -1,23 +1,37 @@
+import clsx from "clsx";
 import Image from "next/image";
+import Loading from "../Loading/Loading";
 
-interface AvatarImageProps {
-  src?: string;
-  alt?: string;
+interface AvatarProps {
+  src?: string | null;
+  alt?: string | null;
+  className?: string;
+  width?: number;
+  height?: number;
 }
 
-export function AvatarImage({ src, alt }: AvatarImageProps) {
+export default function AvatarImage({
+  src,
+  alt = "avatar",
+  className,
+  width,
+  height,
+}: AvatarProps) {
   return (
     <>
       {src ? (
         <Image
           src={src}
-          alt={`avatar-${alt}`}
-          width={24}
-          height={24}
-          className='rounded-full'
+          alt={alt ? alt : ""}
+          className={clsx(
+            "m-0 flex-shrink-0 rounded-full bg-gray-300",
+            className
+          )}
+          width={width ? width : 16}
+          height={height ? height : 16}
         />
       ) : (
-        <div className='w-10 h-10 rounded-full bg-gray-300'></div>
+        <Loading />
       )}
     </>
   );

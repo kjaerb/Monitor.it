@@ -7,13 +7,22 @@ import clsx from "clsx";
 interface ButtonMenuProps {
   children?: React.ReactNode;
   items: ButtonMenuItemProps[];
+  className?: string;
 }
 
-export default function ButtonMenu({ children, items }: ButtonMenuProps) {
+export default function ButtonMenu({
+  children,
+  items,
+  className,
+}: ButtonMenuProps) {
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>
-        <Menu.Button className='flex items-center w-full justify-center rounded-md border  border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100'>
+        <Menu.Button
+          className={clsx(
+            "flex items-center w-full justify-center rounded-md border  border-gray-300 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100",
+            className
+          )}>
           {children}
           <ChevronDownIcon
             className='-mr-1 ml-1 h-5 w-5 text-gray-400'
