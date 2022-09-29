@@ -15,10 +15,12 @@ const Home: NextPage = () => {
         <div className='flex py-16 mb-2 max-w-4xl w-full justify-between'>
           <div className='py-10'>
             <h1 className='text-6xl font-bold text-white'>Monitor.it</h1>
-            <p className='py-4 text-lg text-gray-100'>
+            <p className='py-4 text-lg text-white'>
               Easy monitorization of your trainings and workouts. With build in
-              statistics and notifications for your coaches. Start monitoring
-              your trainings now.
+              statistics and notifications for coaches.
+            </p>
+            <p className='py-4 text-lg font-bold text-white'>
+              Start monitoring your trainings now
             </p>
             <div className='flex'>
               {session ? (
@@ -27,8 +29,8 @@ const Home: NextPage = () => {
                     <div className='px-4 py-2 rounded-lg shadow-2xl'>
                       Go to dashboard
                     </div>
-                    <div className='absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-blue-400 animate-ping'></div>
-                    <div className='absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-blue-400'></div>
+                    <div className='absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-white animate-ping'></div>
+                    <div className='absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-white'></div>
                   </div>
                 </Button>
               ) : (
