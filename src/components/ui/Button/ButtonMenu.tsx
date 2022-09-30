@@ -10,11 +10,7 @@ interface ButtonMenuProps {
   className?: string;
 }
 
-export default function ButtonMenu({
-  children,
-  items,
-  className,
-}: ButtonMenuProps) {
+export function ButtonMenu({ children, items, className }: ButtonMenuProps) {
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>

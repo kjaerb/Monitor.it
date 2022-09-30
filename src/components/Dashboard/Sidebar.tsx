@@ -2,11 +2,15 @@ import clsx from "clsx";
 import { Session } from "next-auth";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/outline/index";
+import { Menu, Transition } from "@headlessui/react";
 import { SearchIcon, SelectorIcon } from "@heroicons/react/solid/index";
 import { navigation, teams } from "@/data/dashboardData";
-import AvatarImage from "../ui/Image/AvatarImage";
+import { AvatarImage } from "../ui/Image/AvatarImage";
+import {
+  SidebarMenuItem,
+  SidebarMenuItemIcon,
+} from "../Sidebar/SidebarMenuItem";
+import SidebarMobile from "../Sidebar/SidebarMobile";
 
 interface SidebarProps {
   session: Session;
@@ -19,123 +23,41 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
 
   return (
     <>
-      <Transition.Root show={sidebarOpen} as={Fragment}>
-        <Dialog
-          as='div'
-          className='relative z-40 lg:hidden'
-          onClose={setSidebarOpen}>
-          <Transition.Child
-            as={Fragment}
-            enter='transition-opacity ease-linear duration-300'
-            enterFrom='opacity-0'
-            enterTo='opacity-100'
-            leave='transition-opacity ease-linear duration-300'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'>
-            <div className='fixed inset-0 bg-gray-600 bg-opacity-75' />
-          </Transition.Child>
-          <div className='fixed inset-0 flex z-40'>
-            <Transition.Child
-              as={Fragment}
-              enter='transition ease-in-out duration-300 transform'
-              enterFrom='-translate-x-full'
-              enterTo='translate-x-0'
-              leave='transition ease-in-out duration-300 transform'
-              leaveFrom='translate-x-0'
-              leaveTo='-translate-x-full'>
-              <Dialog.Panel className='relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white'>
-                <Transition.Child
-                  as={Fragment}
-                  enter='ease-in-out duration-300'
-                  enterFrom='opacity-0'
-                  enterTo='opacity-100'
-                  leave='ease-in-out duration-300'
-                  leaveFrom='opacity-100'
-                  leaveTo='opacity-0'>
-                  <div className='absolute top-0 right-0 -mr-12 pt-2'>
-                    <button
-                      type='button'
-                      className='ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'
-                      onClick={() => setSidebarOpen(false)}>
-                      <span className='sr-only'>Close sidebar</span>
-                      <XIcon
-                        className='h-6 w-6 text-white'
-                        aria-hidden='true'
-                      />
-                    </button>
-                  </div>
-                </Transition.Child>
-                <div className='flex-shrink-0 flex items-center px-4'>
-                  <img
-                    className='h-8 w-auto'
-                    src='https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg'
-                    alt='Workflow'
-                  />
-                </div>
-                <div className='mt-5 flex-1 h-0 overflow-y-auto'>
-                  <nav className='px-2'>
-                    <div className='space-y-1'>
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={clsx(
-                            item.current
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                            "group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
-                          )}
-                          aria-current={item.current ? "page" : undefined}>
-                          <item.icon
-                            className={clsx(
-                              item.current
-                                ? "text-gray-500"
-                                : "text-gray-400 group-hover:text-gray-500",
-                              "mr-3 flex-shrink-0 h-6 w-6"
-                            )}
-                            aria-hidden='true'
-                          />
-                          {item.name}
-                        </a>
-                      ))}
-                    </div>
-                    <div className='mt-8'>
-                      <h3
-                        className='px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider'
-                        id='mobile-teams-headline'>
-                        Teams
-                      </h3>
-                      <div
-                        className='mt-1 space-y-1'
-                        role='group'
-                        aria-labelledby='mobile-teams-headline'>
-                        {teams.map((team) => (
-                          <a
-                            key={team.name}
-                            href={team.href}
-                            className='group flex items-center px-3 py-2 text-base leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50'>
-                            <span
-                              className={clsx(
-                                team.bgColorClass,
-                                "w-2.5 h-2.5 mr-4 rounded-full"
-                              )}
-                              aria-hidden='true'
-                            />
-                            <span className='truncate'>{team.name}</span>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  </nav>
-                </div>
-              </Dialog.Panel>
-            </Transition.Child>
-            <div className='flex-shrink-0 w-14' aria-hidden='true'>
-              {/* Dummy element to force sidebar to shrink to fit close icon */}
-            </div>
+      <SidebarMobile sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}>
+        <div className='space-y-1'>
+          {navigation.map((item, index) => (
+            <SidebarMenuItemIcon
+              key={index}
+              name={item.name}
+              href={item.href}
+              item={{
+                icon: item.icon,
+              }}
+              current={item.current}
+            />
+          ))}
+        </div>
+        <div className='mt-8'>
+          <h3
+            className='px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider'
+            id='mobile-teams-headline'>
+            Teams
+          </h3>
+          <div
+            className='mt-1 space-y-1'
+            role='group'
+            aria-labelledby='mobile-teams-headline'>
+            {teams.map((team, index) => (
+              <SidebarMenuItem
+                key={index}
+                name={team.name}
+                href={team.href}
+                bgColorClass={team.bgColorClass}
+              />
+            ))}
           </div>
-        </Dialog>
-      </Transition.Root>
+        </div>
+      </SidebarMobile>
       {/* Static sidebar for desktop */}
       <div className='hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100'>
         <div className='flex items-center flex-shrink-0 px-6'>
@@ -154,7 +76,11 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
               <Menu.Button className='group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500'>
                 <span className='flex w-full justify-between items-center'>
                   <span className='flex min-w-0 items-center justify-between space-x-3'>
-                    <AvatarImage src={session.user?.image} />
+                    <AvatarImage
+                      src={session.user?.image}
+                      width={32}
+                      height={32}
+                    />
                     <span className='flex-1 flex flex-col min-w-0'>
                       <span className='text-gray-900 text-sm font-medium truncate'>
                         {session.user?.name}

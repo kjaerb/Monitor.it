@@ -10,7 +10,7 @@ interface AvatarProps {
   height?: number;
 }
 
-export default function AvatarImage({
+export function AvatarImage({
   src,
   alt = "avatar",
   className,

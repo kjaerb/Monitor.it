@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import React from "react";
 import { forwardRef } from "react";
+import Loading from "../Loading/Loading";
 
 export const buttonColors = {
   primary: "bg-blue-600 hover:bg-blue-700 text-white",
@@ -70,6 +71,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               isLoading && buttonColors["disabled"],
               className,
             ])}>
+            {isLoading && <Loading />}
             {children}
           </button>
         )}

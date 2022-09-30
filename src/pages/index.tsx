@@ -24,7 +24,10 @@ const Home: NextPage = () => {
             </p>
             <div className='flex'>
               {session ? (
-                <Button variant='ternary' className='px-0 py-0'>
+                <Button
+                  href='/dashboard'
+                  variant='ternary'
+                  className='px-0 py-0'>
                   <div className='relative'>
                     <div className='px-4 py-2 rounded-lg shadow-2xl'>
                       Go to dashboard
