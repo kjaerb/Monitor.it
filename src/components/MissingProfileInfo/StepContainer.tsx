@@ -2,7 +2,7 @@ import { useUser } from "@/hooks/useUser";
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import { useStepStore } from "stores/useStepStore";
-import RoleStep from "./RoleStep";
+import InformationStep from "./InformationStep";
 import AddUserStep from "./AddUsersStep";
 import ProfileSummaryStep from "./ProfileSummaryStep";
 import Steps from "./Steps";
@@ -13,7 +13,7 @@ function StepContainer() {
   const { step } = useStepStore();
 
   return (
-    <Modal isOpen={!hasProfile} variant={"primary"} setIsOpen={setModalOpen}>
+    <Modal isOpen={modalOpen} variant={"primary"} setIsOpen={setModalOpen}>
       <div className='mb-4'>
         <span className='text-white text-xl'>
           Hi {user?.name}, we're missing some information
@@ -21,9 +21,9 @@ function StepContainer() {
         <Steps currentStep={step} />
       </div>
       <div>
-        {step === 0 && <RoleStep />}
+        {step === 0 && <InformationStep />}
         {step === 1 && <AddUserStep />}
-        {step === 2 && <ProfileSummaryStep />}
+        {step === 2 && <ProfileSummaryStep setModalClose={setModalOpen} />}
       </div>
     </Modal>
   );

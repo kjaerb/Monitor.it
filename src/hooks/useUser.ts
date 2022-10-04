@@ -17,11 +17,3 @@ export function useUser() {
     hasProfile,
   };
 }
-
-export function useUpdateProfile() {
-  const { mutate, isLoading, isSuccess } = trpc.useMutation(
-    "user.updateUserProfile"
-  );
-
-  return { updateProfile: mutate, isLoading, isSuccess };
-}

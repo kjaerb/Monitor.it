@@ -13,14 +13,15 @@ import {
 } from "../Sidebar/SidebarMenuItem";
 import SidebarMobile from "../Sidebar/SidebarMobile";
 import monitorItLogo from "@/assets/img/Monitor.it-inverse.png";
+import { useGetProfile } from "@/hooks/useProfile";
 
 interface SidebarProps {
-  session: Session;
   sidebarOpen: boolean;
   setSidebarOpen: (value: boolean) => void;
 }
 
-function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
+function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
+  const { profile, status } = useGetProfile();
   const router = useRouter();
 
   return (
@@ -81,17 +82,13 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
               <Menu.Button className='group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500'>
                 <span className='flex w-full justify-between items-center'>
                   <span className='flex min-w-0 items-center justify-between space-x-3'>
-                    <AvatarImage
-                      src={session.user?.image}
-                      width={32}
-                      height={32}
-                    />
+                    <AvatarImage src={profile?.img} width={32} height={32} />
                     <span className='flex-1 flex flex-col min-w-0'>
                       <span className='text-gray-900 text-sm font-medium truncate'>
-                        {session.user?.name}
+                        {profile?.name}
                       </span>
                       <span className='text-gray-500 text-sm truncate'>
-                        {session.user?.email}
+                        {profile?.email}
                       </span>
                     </span>
                   </span>

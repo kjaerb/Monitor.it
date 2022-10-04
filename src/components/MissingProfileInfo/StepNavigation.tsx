@@ -1,18 +1,22 @@
+import { useCreateProfile } from "@/hooks/useProfile";
 import { useStepStore } from "stores/useStepStore";
 import Button from "../ui/Button/Button";
 
 interface NavigationProps {
   back?: boolean;
   finished?: boolean;
-  handleNext?: boolean;
+  onClick?: () => void;
+  setModalClose?: (arg: boolean) => void;
 }
 
 function StepNavigation({
   back,
   finished = false,
-  handleNext,
+  onClick,
+  setModalClose = () => null,
 }: NavigationProps) {
-  const { incStep, decStep } = useStepStore();
+  const { incStep, decStep, role, name, sport } = useStepStore();
+  const { createProfile } = useCreateProfile();
 
   return (
     <div className='mt-4 flex justify-end'>
@@ -22,13 +26,25 @@ function StepNavigation({
         </Button>
       )}
       {finished ? (
-        <Button>Finish</Button> //Handle mutation
+        <Button
+          onClick={() => {
+            if (!name || !role || !sport) {
+              return null;
+            } else {
+              createProfile({ name, role, sport });
+              setModalClose(false);
+            }
+          }}>
+          Finish
+        </Button> //Handle mutation
       ) : (
         <Button
           onClick={() => {
-            // if (handleNext) {
-            incStep();
-            // }
+            if (!onClick) {
+              incStep();
+            } else {
+              onClick();
+            }
           }}>
           Next
         </Button>

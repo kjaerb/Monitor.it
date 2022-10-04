@@ -1,18 +1,19 @@
 import { Roles } from "@/types/roles";
+import { Sports } from "@/types/sports";
 import create from "zustand";
 
 export const steps = [
   {
     step: 0,
-    title: "Name and Role",
+    title: "Information",
   },
   {
     step: 1,
-    title: "Contact Information",
+    title: "Add users",
   },
   {
     step: 2,
-    title: "Address",
+    title: "Profile summary",
   },
 ];
 
@@ -20,18 +21,26 @@ interface useStepStoreProps {
   step: number;
   incStep: () => void;
   decStep: () => void;
-  role: Roles;
+  role?: Roles;
   setRole: (role: Roles) => void;
-  name: string;
+  sport?: Sports;
+  setSport: (sport: Sports) => void;
+  name?: string;
   setName: (name: string) => void;
+  sharingUsers: string[];
+  setSharingUsers: (users: string[]) => void;
 }
 
 export const useStepStore = create<useStepStoreProps>((set) => ({
   step: 0,
   incStep: () => set((state) => ({ step: state.step + 1 })),
   decStep: () => set((state) => ({ step: state.step - 1 })),
-  role: Roles.UNDEFINED,
+  role: undefined,
   setRole: (role: Roles) => set({ role }),
-  name: "",
+  sport: undefined,
+  setSport: (sport: Sports) => set({ sport }),
+  name: undefined,
   setName: (name: string) => set({ name }),
+  sharingUsers: [],
+  setSharingUsers: (users: string[]) => set({ sharingUsers: users }),
 }));

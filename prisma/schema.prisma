@@ -62,6 +62,7 @@ model Profile {
     email           String    @unique
     role            String?
     sport           String?
+    img             String?
     user            User      @relation(fields: [userId], references: [id])
     userId          String    @unique
     coaches         Profile[] @relation("Coaches")
