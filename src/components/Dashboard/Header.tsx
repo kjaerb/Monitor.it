@@ -5,12 +5,9 @@ import { MenuAlt1Icon } from "@heroicons/react/outline/index";
 import clsx from "clsx";
 import { AvatarImage } from "../ui/Image/AvatarImage";
 import { projects } from "@/data/dashboardData";
-import {
-  ChevronRightIcon,
-  DotsVerticalIcon,
-  SearchIcon,
-} from "@heroicons/react/solid/index";
+import { DotsVerticalIcon, SearchIcon } from "@heroicons/react/solid/index";
 import { formatDateSimple } from "@/lib/date";
+import Button from "../ui/Button/Button";
 
 interface DashboardHeaderProps {
   setSidebarOpen: (open: boolean) => void;
@@ -173,16 +170,22 @@ function DashboardHeader({
           </div>
         </div>
       </div>
-      <div className='border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8'>
-        <div className='flex-1 min-w-0'>
-          <h1 className='text-lg font-medium leading-6 text-gray-900 sm:truncate'>
+      <div className='border-b border-gray-200 px-4 py-4 flex items-center justify-between sm:px-6 lg:px-8'>
+        <div className='min-w-0 flex items-center'>
+          <h1 className='text-lg font-medium text-gray-900 sm:truncate'>
             Home
           </h1>
-        </div>
-        <div className='mt-4 flex sm:mt-0 sm:ml-4'>
-          <span className='text-lg font-medium leading-6 text-gray-900 sm:truncate'>
+          <span className='text-xs sm:truncate ml-2'>
             {formatDateSimple(new Date())}
           </span>
+        </div>
+        <div className='flex justify-center items-center sm:mt-0 sm:ml-4'>
+          <Button className='flex flex-col items-center'>
+            <span>Start training</span>
+            {/* <span className='text-xs sm:truncate'>
+              {formatDateSimple(new Date())}
+            </span> */}
+          </Button>
         </div>
       </div>
       {/* Pinned projects */}
@@ -190,7 +193,7 @@ function DashboardHeader({
         <>
           <div className='px-4 mt-6 sm:px-6 lg:px-8'>
             <h2 className='text-gray-500 text-xs font-medium uppercase tracking-wide'>
-              Pinned Projects
+              Pinned trainings
             </h2>
             <ul
               role='list'
@@ -284,45 +287,6 @@ function DashboardHeader({
                       </Transition>
                     </Menu>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Projects list (only on smallest breakpoint) */}
-          <div className='mt-10 sm:hidden'>
-            <div className='px-4 sm:px-6'>
-              <h2 className='text-gray-500 text-xs font-medium uppercase tracking-wide'>
-                Projects
-              </h2>
-            </div>
-            <ul
-              role='list'
-              className='mt-3 border-t border-gray-200 divide-y divide-gray-100'>
-              {projects.map((project) => (
-                <li key={project.id}>
-                  <a
-                    href='#'
-                    className='group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6'>
-                    <span className='flex items-center truncate space-x-3'>
-                      <span
-                        className={clsx(
-                          project.bgColorClass,
-                          "w-2.5 h-2.5 flex-shrink-0 rounded-full"
-                        )}
-                        aria-hidden='true'
-                      />
-                      <span className='font-medium truncate text-sm leading-6'>
-                        {project.title}{" "}
-                        <span className='truncate font-normal text-gray-500'>
-                          in {project.team}
-                        </span>
-                      </span>
-                    </span>
-                    <ChevronRightIcon
-                      className='ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500'
-                      aria-hidden='true'
-                    />
-                  </a>
                 </li>
               ))}
             </ul>

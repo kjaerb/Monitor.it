@@ -1,11 +1,13 @@
 datasource db {
-    provider          = "sqlite"
-    url               = env("DATABASE_URL")
-    shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
+    provider             = "mysql"
+    url                  = env("DATABASE_URL")
+    shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
+    referentialIntegrity = "prisma"
 }
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["referentialIntegrity"]
 }
 
 model Account {
@@ -14,12 +16,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String?
-    access_token      String?
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String?
+    id_token          String? @db.Text
     session_state     String?
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -43,6 +45,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    profile       Profile?
 }
 
 model VerificationToken {
@@ -51,4 +54,25 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Profile {
+    id              String    @id @default(cuid())
+    name            String
+    email           String    @unique
+    role            String?
+    sport           String?
+    user            User      @relation(fields: [userId], references: [id])
+    userId          String    @unique
+    coaches         Profile[] @relation("Coaches")
+    athletes        Profile[] @relation("Athletes")
+    coachesProfile  Profile?  @relation("Coaches", fields: [coachesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    coachesId       String?
+    athletesProfile Profile?  @relation("Athletes", fields: [athletesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    athletesId      String?
+}
+
+model Training {
+    id   String   @id @default(cuid())
+    date DateTime
 }

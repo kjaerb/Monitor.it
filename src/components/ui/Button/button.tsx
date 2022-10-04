@@ -51,7 +51,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               ref={ref}
               onClick={onClick}
               className={clsx([
-                "shadow-md rounded-md px-4 py-2",
+                "shadow-md rounded-md px-4 py-2 transition-colors duration-200",
                 buttonColors[variant],
                 isLoading && buttonColors["disabled"],
                 className,

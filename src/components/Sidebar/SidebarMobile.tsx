@@ -2,12 +2,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { XIcon } from "@heroicons/react/outline/index";
 import clsx from "clsx";
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
   children?: React.ReactNode;
-  imgSrc?: string | null;
+  imgSrc?: string | StaticImageData | null;
 }
 
 function SidebarMobile({
@@ -61,13 +63,16 @@ function SidebarMobile({
                 </div>
               </Transition.Child>
               {imgSrc && (
-                <div className='flex-shrink-0 flex items-center px-4'>
-                  <img
-                    className='h-8 w-auto'
-                    src='https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg'
-                    alt='Workflow'
-                  />
-                </div>
+                <Link href={"/"}>
+                  <div className='flex-shrink-0 flex items-center px-4 cursor-pointer'>
+                    <Image
+                      src={imgSrc}
+                      alt='Workflow'
+                      width={273 / 1.75}
+                      height={49 / 1.75}
+                    />
+                  </div>
+                </Link>
               )}
 
               <div

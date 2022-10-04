@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Session } from "next-auth";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { SearchIcon, SelectorIcon } from "@heroicons/react/solid/index";
@@ -11,6 +12,7 @@ import {
   SidebarMenuItemIcon,
 } from "../Sidebar/SidebarMenuItem";
 import SidebarMobile from "../Sidebar/SidebarMobile";
+import monitorItLogo from "@/assets/img/Monitor.it-inverse.png";
 
 interface SidebarProps {
   session: Session;
@@ -23,7 +25,10 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
 
   return (
     <>
-      <SidebarMobile sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}>
+      <SidebarMobile
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        imgSrc={monitorItLogo}>
         <div className='space-y-1'>
           {navigation.map((item, index) => (
             <SidebarMenuItemIcon
@@ -61,11 +66,11 @@ function Sidebar({ session, sidebarOpen, setSidebarOpen }: SidebarProps) {
       {/* Static sidebar for desktop */}
       <div className='hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100'>
         <div className='flex items-center flex-shrink-0 px-6'>
-          <img
+          <Image
             onClick={() => router.push("/")}
-            className='h-8 w-auto'
-            src='https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg'
-            alt='Workflow'
+            className='h-8 w-auto cursor-pointer'
+            src={monitorItLogo}
+            alt='monitor.it'
           />
         </div>
         {/* Sidebar component, swap this element with another sidebar if you like */}

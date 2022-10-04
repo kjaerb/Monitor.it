@@ -28,7 +28,8 @@
     "react-query": "3.39.2",
     "solid": "link:@heroicons/react/solid",
     "superjson": "^1.10.0",
-    "zod": "^3.18.0"
+    "zod": "^3.18.0",
+    "zustand": "^4.1.1"
   },
   "devDependencies": {
     "@heroicons/react": "v1",

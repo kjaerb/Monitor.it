@@ -3,6 +3,7 @@
 import { TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { createRouter } from "../createRouter";
+import { userRouter } from "./user.router";
 
 export const appRouter = createRouter()
   .query("getSession", {
@@ -18,7 +19,8 @@ export const appRouter = createRouter()
     }
     return next();
   })
-  .transformer(superjson);
+  .transformer(superjson)
+  .merge("user.", userRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

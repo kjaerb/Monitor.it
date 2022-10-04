@@ -12,9 +12,9 @@ const Home: NextPage = () => {
     <LandingPageLayout>
       <div className='w-full h-3/5 bg-gradient-to-b from-blue-600 to-blue-400 absolute top-0 -z-10' />
       <section className='mx-auto my-10 flex justify-center items-center flex-col'>
-        <div className='flex py-16 mb-2 max-w-4xl w-full justify-between'>
+        <div className='flex py-16 mb-2 max-w-4xl w-full justify-between px-4 lg:px-0'>
           <div className='py-10'>
-            <h1 className='text-6xl font-bold text-white'>Monitor.it</h1>
+            <h1 className='text-6xl font-bold text-white'>TLDR</h1>
             <p className='py-4 text-lg text-white'>
               Easy monitorization of your trainings and workouts. With build in
               statistics and notifications for coaches.
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
               )}
             </div>
           </div>
-          <div>
+          <div className='pl-20'>
             <Image
               src={dashboardImage}
               alt={"dashboard"}
