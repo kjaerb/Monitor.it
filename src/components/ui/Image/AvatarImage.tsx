@@ -6,8 +6,8 @@ interface AvatarProps {
   src?: string | null;
   alt?: string | null;
   className?: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
 }
 
 export function AvatarImage({

@@ -4,6 +4,7 @@ import { TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { createRouter } from "../createRouter";
 import { profileRouter } from "./profile.router";
+import { trainingRouter } from "./training.router";
 import { userRouter } from "./user.router";
 
 export const appRouter = createRouter()
@@ -22,7 +23,8 @@ export const appRouter = createRouter()
   })
   .transformer(superjson)
   .merge("user.", userRouter)
-  .merge("profile.", profileRouter);
+  .merge("profile.", profileRouter)
+  .merge("training.", trainingRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

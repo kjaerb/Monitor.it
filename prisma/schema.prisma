@@ -57,23 +57,38 @@ model VerificationToken {
 }
 
 model Profile {
-    id              String    @id @default(cuid())
+    id              String     @id @default(cuid())
+    createdAt       DateTime   @default(now())
+    updatedAt       DateTime   @updatedAt
     name            String
-    email           String    @unique
+    email           String     @unique
     role            String?
     sport           String?
     img             String?
-    user            User      @relation(fields: [userId], references: [id])
-    userId          String    @unique
-    coaches         Profile[] @relation("Coaches")
-    athletes        Profile[] @relation("Athletes")
-    coachesProfile  Profile?  @relation("Coaches", fields: [coachesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    user            User       @relation(fields: [userId], references: [id])
+    userId          String     @unique
+    coaches         Profile[]  @relation("Coaches")
+    athletes        Profile[]  @relation("Athletes")
+    coachesProfile  Profile?   @relation("Coaches", fields: [coachesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
     coachesId       String?
-    athletesProfile Profile?  @relation("Athletes", fields: [athletesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    athletesProfile Profile?   @relation("Athletes", fields: [athletesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
     athletesId      String?
+    trainings       Training[]
 }
 
 model Training {
-    id   String   @id @default(cuid())
-    date DateTime
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    reps      Rep[]
+    Profile   Profile? @relation(fields: [profileId], references: [id])
+    profileId String?
+}
+
+model Rep {
+    id         String    @id @default(cuid())
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+    Training   Training? @relation(fields: [trainingId], references: [id])
+    trainingId String?
 }
