@@ -6,7 +6,7 @@ export function formatDate(date?: Date) {
   }
 }
 
-export function formatDateSimple(date: Date) {
+export function formatDateSimple(date: Date | string) {
   if (date) {
     return format(new Date(date), "dd/MM-yyyy");
   }

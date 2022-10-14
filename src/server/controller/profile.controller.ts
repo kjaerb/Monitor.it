@@ -1,13 +1,32 @@
 import { Roles } from "@/types/roles";
 import { TRPCError } from "@trpc/server";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/utils/prisma";
 
 export async function getProfileByEmail(email: string) {
-  return await prisma.profile.findFirst({
+  const user = await prisma.user.findFirst({
     where: {
-      email,
+      email: email,
+    },
+    include: {
+      profile: true,
     },
   });
+
+  if (!user) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "User not found",
+    });
+  }
+
+  if (!user?.profile) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "Profile not found",
+    });
+  }
+
+  return user.profile;
 }
 
 export async function getProfileNames() {
@@ -26,35 +45,4 @@ export async function createProfile({
   email,
   sport,
   role,
-}: createProfileProps) {
-  const user = await prisma.user.findFirst({
-    where: {
-      email,
-    },
-    include: {
-      profile: true,
-    },
-  });
-
-  if (!user) {
-    throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "User not found.",
-    });
-  }
-
-  return await prisma.profile.create({
-    data: {
-      img: user.image,
-      sport,
-      email,
-      name,
-      role,
-      user: {
-        connect: {
-          id: user.id,
-        },
-      },
-    },
-  });
-}
+}: createProfileProps) {}

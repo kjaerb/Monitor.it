@@ -48,7 +48,7 @@ export default function Modal({
               <div
                 className={clsx(
                   modalVariant[variant],
-                  "relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all w-full sm:my-8 sm:w-full sm:max-w-5xl sm:p-6"
+                  "relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all w-full sm:my-8 sm:w-full sm:max-w-5xl sm:p-6 sm:mx-6"
                 )}>
                 {children}
               </div>

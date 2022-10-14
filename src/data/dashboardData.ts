@@ -1,3 +1,4 @@
+import { colorFromSeed } from "@/utils/color";
 import {
   ClockIcon,
   HomeIcon,
@@ -49,6 +50,6 @@ export const projects = [
     totalMembers: 12,
     lastUpdated: "March 17, 2020",
     pinned: true,
-    bgColorClass: "bg-pink-600",
+    bgColorClass: `bg-[${colorFromSeed("graphql")}]`,
   },
 ];

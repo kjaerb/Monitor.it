@@ -1,6 +1,6 @@
 // src/server/router/context.ts
 import * as trpcNext from "@trpc/server/adapters/next";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/utils/prisma";
 import * as trpc from "@trpc/server";
 import { unstable_getServerSession as getServerSession } from "next-auth";
 

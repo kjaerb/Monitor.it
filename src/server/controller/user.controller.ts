@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/utils/prisma";
 
 export async function getUserByEmail(email: string) {
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findFirst({
     where: {
       email,
     },

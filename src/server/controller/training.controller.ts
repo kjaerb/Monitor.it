@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/utils/prisma";
 import { TRPCError } from "@trpc/server";
 
 export async function getTrainingById(id: string) {
@@ -10,13 +10,13 @@ export async function getTrainingById(id: string) {
 }
 
 export async function get30LatestTrainings(email: string) {
-  const profile = await prisma.profile.findFirst({
+  const user = await prisma.user.findFirst({
     where: {
       email,
     },
   });
 
-  if (!profile) {
+  if (!user) {
     throw new TRPCError({
       code: "NOT_FOUND",
       message: "Profile not found",
@@ -26,7 +26,7 @@ export async function get30LatestTrainings(email: string) {
   return await prisma.training.findMany({
     take: 30,
     where: {
-      profileId: email,
+      userId: email,
     },
     orderBy: {
       createdAt: "desc",

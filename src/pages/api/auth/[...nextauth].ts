@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import InstagramProvider from "next-auth/providers/instagram";
 import FacebookProvider from "next-auth/providers/facebook";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/utils/prisma";
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers

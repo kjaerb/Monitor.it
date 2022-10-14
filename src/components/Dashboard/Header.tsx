@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { AvatarImage } from "../ui/Image/AvatarImage";
 import { projects } from "@/data/dashboardData";
 import { DotsVerticalIcon, SearchIcon } from "@heroicons/react/solid/index";
-import { formatDateSimple } from "@/lib/date";
+import { formatDateSimple } from "@/utils/date";
 import Button from "../ui/Button/Button";
 
 interface DashboardHeaderProps {

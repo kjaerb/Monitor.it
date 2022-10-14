@@ -38,14 +38,21 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    profile       Profile?
+    id              String     @id @default(cuid())
+    name            String?
+    email           String?    @unique
+    emailVerified   DateTime?
+    image           String?
+    accounts        Account[]
+    sessions        Session[]
+    profile         Profile?
+    coaches         User[]     @relation("Coaches")
+    athletes        User[]     @relation("Athletes")
+    coachesProfile  User?      @relation("Coaches", fields: [coachesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    coachesId       String?
+    athletesProfile User?      @relation("Athletes", fields: [athletesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    athletesId      String?
+    trainings       Training[]
 }
 
 model VerificationToken {
@@ -57,23 +64,14 @@ model VerificationToken {
 }
 
 model Profile {
-    id              String     @id @default(cuid())
-    createdAt       DateTime   @default(now())
-    updatedAt       DateTime   @updatedAt
-    name            String
-    email           String     @unique
-    role            String?
-    sport           String?
-    img             String?
-    user            User       @relation(fields: [userId], references: [id])
-    userId          String     @unique
-    coaches         Profile[]  @relation("Coaches")
-    athletes        Profile[]  @relation("Athletes")
-    coachesProfile  Profile?   @relation("Coaches", fields: [coachesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    coachesId       String?
-    athletesProfile Profile?   @relation("Athletes", fields: [athletesId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-    athletesId      String?
-    trainings       Training[]
+    id         String   @id @default(cuid())
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    role       String?
+    sport      String?
+    figLicense String? // Should probably be changed to a model later
+    user       User     @relation(fields: [userId], references: [id])
+    userId     String   @unique
 }
 
 model Training {
@@ -81,8 +79,8 @@ model Training {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     reps      Rep[]
-    Profile   Profile? @relation(fields: [profileId], references: [id])
-    profileId String?
+    user      User?    @relation(fields: [userId], references: [id])
+    userId    String?
 }
 
 model Rep {

@@ -6,6 +6,7 @@ import InformationStep from "./InformationStep";
 import AddUserStep from "./AddUsersStep";
 import ProfileSummaryStep from "./ProfileSummaryStep";
 import Steps from "./Steps";
+import FigLicenseStep from "./FigLicenseStep";
 
 function StepContainer() {
   const { user, hasProfile } = useUser();
@@ -13,7 +14,8 @@ function StepContainer() {
   const { step } = useStepStore();
 
   return (
-    <Modal isOpen={modalOpen} variant={"primary"} setIsOpen={setModalOpen}>
+    <Modal isOpen={!hasProfile} variant={"primary"} setIsOpen={setModalOpen}>
+      {/* Thanks to https://github.com/Fedeorlandau for the template for the modal */}
       <div className='mb-4'>
         <span className='text-white text-xl'>
           Hi {user?.name}, we're missing some information
@@ -21,9 +23,10 @@ function StepContainer() {
         <Steps currentStep={step} />
       </div>
       <div>
-        {step === 0 && <InformationStep />}
-        {step === 1 && <AddUserStep />}
-        {step === 2 && <ProfileSummaryStep setModalClose={setModalOpen} />}
+        {step === 0 && <FigLicenseStep />}
+        {step === 1 && <InformationStep />}
+        {step === 2 && <AddUserStep />}
+        {step === 3 && <ProfileSummaryStep setModalClose={setModalOpen} />}
       </div>
     </Modal>
   );
