@@ -2,9 +2,10 @@ import AddUserStep from "@/components/MissingProfileInfo/AddUsersStep";
 import FigLicenseStep from "@/components/MissingProfileInfo/FigLicenseStep";
 import InformationStep from "@/components/MissingProfileInfo/InformationStep";
 import ProfileSummaryStep from "@/components/MissingProfileInfo/ProfileSummaryStep";
-import { AthleteInfoProps } from "@/data/trampolineLicenses";
-import { Roles } from "@/types/roles";
-import { Discipline } from "@/types/discipline";
+import { Role } from "@/types/roles";
+import { Sport } from "@/types/sport";
+import { FIGAthlete } from "@prisma/client";
+
 import create from "zustand";
 
 export const steps = [
@@ -34,34 +35,34 @@ interface useStepStoreProps {
   step: number;
   incStep: () => void;
   decStep: () => void;
-  role?: Roles;
-  setRole: (role: Roles) => void;
-  sport?: Discipline | string;
-  setSport: (sport: Discipline | string) => void;
+  role?: Role;
+  setRole: (role: Role) => void;
+  sport?: Sport | string;
+  setSport: (sport: Sport | string) => void;
   name?: string;
   setName: (name: string) => void;
   sharingUsers: string[];
   setSharingUsers: (users: string[]) => void;
-  figLicense?: string;
+  figLicense: string;
   setFigLicense: (license: string) => void;
-  athlete?: AthleteInfoProps;
-  setAthlete: (athlete: AthleteInfoProps) => void;
+  athlete?: FIGAthlete;
+  setAthlete: (athlete?: FIGAthlete) => void;
 }
 
 export const useStepStore = create<useStepStoreProps>((set) => ({
   step: 0,
   incStep: () => set((state) => ({ step: state.step + 1 })),
   decStep: () => set((state) => ({ step: state.step - 1 })),
-  role: undefined,
-  setRole: (role: Roles) => set({ role }),
-  sport: undefined,
-  setSport: (sport: Discipline | string) => set({ sport }),
+  role: Role.UNDEFINED,
+  setRole: (role) => set({ role }),
+  sport: Sport.UNDEFINED,
+  setSport: (sport) => set({ sport }),
   name: undefined,
-  setName: (name: string) => set({ name }),
+  setName: (name) => set({ name }),
   sharingUsers: [],
-  setSharingUsers: (users: string[]) => set({ sharingUsers: users }),
+  setSharingUsers: (users) => set({ sharingUsers: users }),
   figLicense: "",
-  setFigLicense: (license: string) => set({ figLicense: license }),
+  setFigLicense: (license) => set({ figLicense: license }),
   athlete: undefined,
-  setAthlete: (athlete: AthleteInfoProps) => set({ athlete }),
+  setAthlete: (athlete) => set({ athlete }),
 }));

@@ -1,10 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import {
-  createProfile,
-  getProfileByEmail,
-  getProfileNames,
-} from "../controller/profile.controller";
+import { createProfile, getProfile } from "../controller/profile.controller";
 import { createRouter } from "../createRouter";
 
 export const profileRouter = createRouter()
@@ -15,49 +11,37 @@ export const profileRouter = createRouter()
       if (!email) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
-          message: "User not logged in.",
+          message: "You must be logged in to view your profile",
         });
       }
 
-      const result = await getProfileByEmail(email);
-
-      return { result };
-    },
-  })
-  .query("getProfileByEmail", {
-    input: z.object({
-      email: z.string(),
-    }),
-    async resolve({ input: { email }, ctx }) {
-      const result = await getProfileByEmail(email);
-
-      return { result };
-    },
-  })
-  .query("getProfileNames", {
-    async resolve({ ctx }) {
-      const result = await getProfileNames();
+      const result = await getProfile(email);
 
       return { result };
     },
   })
   .mutation("createProfile", {
     input: z.object({
-      name: z.string(),
       role: z.string(),
       sport: z.string(),
+      figLicense: z.number().nullish(),
     }),
-    async resolve({ input: { name, role, sport }, ctx }) {
+    async resolve({ ctx, input: { role, sport, figLicense } }) {
       const email = ctx.session?.user?.email;
 
       if (!email) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
-          message: "You must be logged in to access this resource.",
+          message: "You must be logged in to create a profile",
         });
       }
 
-      const result = await createProfile({ name, email, sport, role });
+      const result = await createProfile({
+        email,
+        role,
+        sport,
+        figLicense,
+      });
 
       return { result };
     },

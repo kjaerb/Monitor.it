@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useStepStore } from "stores/useStepStore";
 import StepNavigation from "./StepNavigation";
-import { Discipline } from "@/types/discipline";
+import { Sport } from "@/types/sport";
 
 function InformationStep() {
   const { user } = useUser();
@@ -39,18 +39,18 @@ function InformationStep() {
           <select
             id='underline_select'
             value={sport}
-            onChange={(e) => setSport(e.target.value as Discipline)}
+            onChange={(e) => setSport(e.target.value as Sport)}
             className={clsx(
               "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer",
               formValidation && sport === undefined && "border-red-500"
             )}>
             <>
-              <option>Select a discipline</option>
-              {Object.values(Discipline).map((discipline) => {
-                if (discipline !== Discipline.UNDEFINED) {
+              <option>Select a sport</option>
+              {Object.values(Sport).map((sport) => {
+                if (sport !== Sport.UNDEFINED) {
                   return (
-                    <option key={discipline} value={discipline}>
-                      {discipline}
+                    <option key={sport} value={sport}>
+                      {sport}
                     </option>
                   );
                 }

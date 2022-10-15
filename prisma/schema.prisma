@@ -64,14 +64,33 @@ model VerificationToken {
 }
 
 model Profile {
-    id         String   @id @default(cuid())
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    role       String?
-    sport      String?
-    figLicense String? // Should probably be changed to a model later
-    user       User     @relation(fields: [userId], references: [id])
-    userId     String   @unique
+    id           String      @id @default(cuid())
+    createdAt    DateTime    @default(now())
+    updatedAt    DateTime    @updatedAt
+    role         String?
+    sport        String?
+    figAthlete   FIGAthlete? // Should probably be changed to a model later @relation(fields: [fIGAthleteId], references: [id])
+    user         User        @relation(fields: [userId], references: [id])
+    userId       String      @unique
+    fIGAthleteId String
+}
+
+model FIGAthlete {
+    idgymnastlicense   Int      @id
+    createdAt          DateTime @default(now())
+    updatedAt          DateTime @updatedAt
+    gymnastid          Int
+    discipline         String
+    validto            DateTime
+    licensestatus      DateTime
+    figImgUrl          String
+    preferredlastname  String
+    preferredfirstname String
+    birth              DateTime
+    gender             String
+    country            String
+    profile            Profile  @relation(fields: [profileId], references: [id])
+    profileId          String   @unique
 }
 
 model Training {

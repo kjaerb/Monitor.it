@@ -1,4 +1,4 @@
-export enum Discipline {
+export enum Sport {
   TRAMPOLINE = "Trampoline",
   TUMBLING = "Tumbling",
   TEAMGYM = "TeamGym",
@@ -6,11 +6,11 @@ export enum Discipline {
   UNDEFINED = "undefined",
 }
 
-export function getSport(sport: string): Discipline {
+export function getSport(sport: string): Sport {
   switch (sport) {
     case "TRA":
-      return Discipline.TRAMPOLINE;
+      return Sport.TRAMPOLINE;
     default:
-      return Discipline.UNDEFINED;
+      return Sport.UNDEFINED;
   }
 }

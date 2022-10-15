@@ -15,7 +15,7 @@ function StepNavigation({
   onClick,
   setModalClose = () => null,
 }: NavigationProps) {
-  const { incStep, decStep, role, name, sport } = useStepStore();
+  const { incStep, decStep, role, name, sport, athlete } = useStepStore();
   const { createProfile } = useCreateProfile();
 
   return (
@@ -31,7 +31,7 @@ function StepNavigation({
             if (!name || !role || !sport) {
               return null;
             } else {
-              createProfile({ name, role, sport });
+              createProfile({ role, sport, figLicense: athlete?.gymnastId });
               setModalClose(false);
             }
           }}>

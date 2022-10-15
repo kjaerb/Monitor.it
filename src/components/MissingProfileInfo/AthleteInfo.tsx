@@ -1,6 +1,5 @@
-import { getSport } from "@/types/discipline";
-import { formatDateSimple } from "@/utils/date";
 import { useStepStore } from "stores/useStepStore";
+import Loading from "../ui/Loading/Loading";
 
 interface props {
   hasSearched: boolean;
@@ -10,48 +9,42 @@ function AthleteInfo({ hasSearched }: props) {
   const { athlete } = useStepStore();
 
   return (
-    <div className='w-1/2 p-2 ml-2 flex flex-col shadow-md border rounded-lg bg-gray-300 text-gray-900'>
-      <span>Athlete information</span>
-      <span className='mt-2'>
-        {hasSearched && !athlete ? (
-          <span className='text-red-500'>No athlete found</span>
-        ) : (
-          <div>
-            <div className='flex'>
-              <span className='w-1/2 border-b border-black'>
-                <span className='text-sm'>First name:</span>{" "}
-                {athlete?.firstName}
-              </span>
-              <span className='w-1/2 border-b border-black'>
-                <span className='text-sm'>Last name:</span> {athlete?.lastName}
-              </span>
+    <div className='w-1/2 relative max-w-sm mx-auto min-w-0 break-words bg-white mb-6 shadow-lg rounded-xl mt-16'>
+      {hasSearched ? (
+        athlete ? (
+          <div className='px-6'>
+            <div className='flex flex-wrap justify-center'>
+              <div className='w-full flex justify-center'>
+                <img
+                  src={athlete?.figImgUrl}
+                  className='shadow-xl object-top rounded-full w-32 h-32 object-cover -mt-16'
+                />
+              </div>
             </div>
-            <div className='flex mt-2'>
-              <span className='w-1/2 border-b border-black'>
-                <span className='text-sm'>Discipline:</span>{" "}
-                {athlete?.discipline}
-              </span>
-              <span className='w-1/2 border-b border-black'>
-                <span className='text-sm'>Country:</span> {athlete?.country}
-              </span>
-            </div>
-            <div className='flex mt-2'>
-              <span className='w-1/2 border-b border-black'>
-                <span className='text-sm'>Year of Birth:</span>{" "}
-                {athlete?.yearOfBirth}
-              </span>
-              <span className='w-1/2 border-b border-black'>
-                {athlete?.validUntil && (
-                  <>
-                    <span className='text-sm'>Valid until:</span>{" "}
-                    {formatDateSimple(athlete.validUntil)}
-                  </>
-                )}
-              </span>
+            <div className='text-center mt-2'>
+              <h3 className='text-2xl text-slate-700 font-bold leading-normal mb-1'>
+                {athlete?.preferredfirstname} {athlete?.preferredlastname}
+              </h3>
+              <div className='text-xs mt-0 mb-4 text-slate-400 font-bold uppercase'>
+                <i className='fas fa-map-marker-alt mr-2 text-slate-400 opacity-75'></i>
+                {athlete?.country}
+              </div>
             </div>
           </div>
-        )}
-      </span>
+        ) : (
+          <div className='w-full h-full flex items-center justify-center'>
+            <h3 className='text-xl text-red-500 font-bold leading-normal mb-1'>
+              No athlete found
+            </h3>
+          </div>
+        )
+      ) : (
+        <div className='w-full h-full flex items-center justify-center'>
+          <h3 className='text-xl text-slate-700 font-bold leading-normal mb-1'>
+            Search for an athlete
+          </h3>
+        </div>
+      )}
     </div>
   );
 }

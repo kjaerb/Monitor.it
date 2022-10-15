@@ -1,32 +1,20 @@
-import { TrampolineLicense } from "@/data/trampolineLicenses";
-import { getSport } from "@/types/discipline";
-import { Role } from "@/types/roles";
-import { getAtheleteInfo } from "@/utils/license";
 import clsx from "clsx";
 import { useState } from "react";
 import { useStepStore } from "stores/useStepStore";
 import Button from "../ui/Button/Button";
 import AthleteInfo from "./AthleteInfo";
 import StepNavigation from "./StepNavigation";
+import { getFigLicense } from "@/utils/fig";
 
 function FigLicenseStep() {
   const [hasSearched, setHasSearched] = useState(false);
 
-  const {
-    setName,
-    setSport,
-    incStep,
-    setRole,
-    setFigLicense,
-    figLicense,
-    setAthlete,
-    athlete,
-  } = useStepStore();
+  const { incStep, setFigLicense, figLicense, setAthlete } = useStepStore();
 
   return (
     <>
       <div className='flex text-white'>
-        <div className='flex flex-col w-1/2 mr-2'>
+        <div className='flex flex-col w-1/2 mt-16 mr-2'>
           <label htmlFor='underline_select' className='sr-only'>
             Underline select
           </label>
@@ -37,27 +25,24 @@ function FigLicenseStep() {
             value={figLicense}
             onChange={(e) => setFigLicense(e.target.value)}
             className={clsx(
-              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+              "block py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none  dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
             )}
             placeholder={"Enter FIG License"}
           />
           <Button
             className='mt-4 w-fit'
-            onClick={() => {
-              const a = getAtheleteInfo(figLicense as TrampolineLicense);
-              if (a) {
-                setAthlete({
-                  ...a,
-                  lastName: transformName(a.lastName),
-                  discipline: getSport(a.discipline),
-                });
+            onClick={async () => {
+              await getFigLicense(figLicense).then((athlete) => {
                 if (athlete) {
-                  setName(`${athlete.firstName} ${athlete.lastName}`);
-                  setSport(athlete.discipline);
-                  setRole(Role.ATHLETE);
+                  setHasSearched(true);
+                  setAthlete({
+                    ...athlete,
+                    preferredlastname: transformName(athlete.preferredlastname),
+                  });
+                } else {
+                  setAthlete(undefined);
                 }
-              }
-              setHasSearched(true);
+              });
             }}>
             Get license
           </Button>
