@@ -11,7 +11,7 @@ export const profileRouter = createRouter()
       if (!email) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
-          message: "You must be logged in to view your profile",
+          message: "You must be logged in to access this resource",
         });
       }
 
@@ -24,24 +24,35 @@ export const profileRouter = createRouter()
     input: z.object({
       role: z.string(),
       sport: z.string(),
-      figLicense: z.number().nullish(),
+      figAthlete: z
+        .object({
+          idgymnastlicense: z.number(),
+          gymnastid: z.number(),
+          discipline: z.string(),
+          validto: z.date(),
+          licensestatus: z.date(),
+          figImgUrl: z.string(),
+          preferredlastname: z.string(),
+          preferredfirstname: z.string(),
+          birth: z.date(),
+          gender: z.string(),
+          country: z.string(),
+          createdAt: z.date(),
+          updatedAt: z.date(),
+          profileId: z.string(),
+        })
+        .nullish(),
     }),
-    async resolve({ ctx, input: { role, sport, figLicense } }) {
+    async resolve({ ctx, input: { figAthlete, role, sport } }) {
       const email = ctx.session?.user?.email;
 
       if (!email) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
-          message: "You must be logged in to create a profile",
+          message: "You must be logged in to access this resource",
         });
       }
-
-      const result = await createProfile({
-        email,
-        role,
-        sport,
-        figLicense,
-      });
+      const result = await createProfile({ email, figAthlete, role, sport });
 
       return { result };
     },

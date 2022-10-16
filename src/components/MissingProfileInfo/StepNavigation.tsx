@@ -31,7 +31,7 @@ function StepNavigation({
             if (!name || !role || !sport) {
               return null;
             } else {
-              createProfile({ role, sport, figLicense: athlete?.gymnastId });
+              createProfile({ role, sport, figAthlete: athlete });
               setModalClose(false);
             }
           }}>

@@ -21,6 +21,11 @@ export default defineNextConfig({
     defaultLocale: "en",
   },
   images: {
-    domains: ["images.unsplash.com", "lh3.googleusercontent.com"],
+    minimumCacheTTL: 60,
+    domains: [
+      "images.unsplash.com",
+      "lh3.googleusercontent.com",
+      "https://www.gymnastics.sport",
+    ],
   },
 });

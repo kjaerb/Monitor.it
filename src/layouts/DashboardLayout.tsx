@@ -4,6 +4,7 @@ import Sidebar from "@/components/Dashboard/Sidebar";
 import DashboardHeader from "@/components/Dashboard/Header";
 import { useUser } from "@/hooks/useUser";
 import StepContainer from "@/components/MissingProfileInfo/StepContainer";
+import clsx from "clsx";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -33,11 +34,7 @@ export default function DashboardLayout({
         ```
       */}
       <div className='min-h-full'>
-        <Sidebar
-          session={session}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-        />
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         {/* Main column */}
         <div className='lg:pl-64 flex flex-col'>
           {/* Search header */}
@@ -46,13 +43,15 @@ export default function DashboardLayout({
             session={session}
             showPinned={showPinned}
           />
-          <main className='flex-1 mt-8'>
+          <main
+            className={clsx(
+              "flex-1 mt-8",
+              showPinned && "border-t border-gray-200"
+            )}>
             {/* Page title & actions */}
-            <div className='align-middle inline-block min-w-full border-t border-gray-200'>
-              <div className='mt-2 px-4 sm:px-6 lg:px-8'>
-                <StepContainer />
-                {children}
-              </div>
+            <div className='mt-2 px-4 sm:px-6 lg:px-8'>
+              <StepContainer />
+              {children}
             </div>
           </main>
         </div>

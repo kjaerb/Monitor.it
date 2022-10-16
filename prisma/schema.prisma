@@ -64,18 +64,17 @@ model VerificationToken {
 }
 
 model Profile {
-    id           String      @id @default(cuid())
-    createdAt    DateTime    @default(now())
-    updatedAt    DateTime    @updatedAt
-    role         String?
-    sport        String?
-    figAthlete   FIGAthlete? // Should probably be changed to a model later @relation(fields: [fIGAthleteId], references: [id])
-    user         User        @relation(fields: [userId], references: [id])
-    userId       String      @unique
-    fIGAthleteId String
+    id         String      @id @default(cuid())
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    role       String?
+    sport      String?
+    figAthlete Figathlete?
+    user       User        @relation(fields: [userId], references: [id])
+    userId     String      @unique
 }
 
-model FIGAthlete {
+model Figathlete {
     idgymnastlicense   Int      @id
     createdAt          DateTime @default(now())
     updatedAt          DateTime @updatedAt

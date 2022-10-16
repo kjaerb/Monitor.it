@@ -13,8 +13,48 @@ import {
 } from "../Sidebar/SidebarMenuItem";
 import SidebarMobile from "../Sidebar/SidebarMobile";
 import monitorItLogo from "@/assets/img/Monitor.it-inverse.png";
-import { useGetProfile } from "@/hooks/useProfile";
 import { useUser } from "@/hooks/useUser";
+import DashboardNavLinks from "./Navigation";
+import { useGet30LatestTrainings } from "@/hooks/useTraining";
+import { formatDateSimple } from "@/utils/date";
+
+export interface DashboardNavLinkProps {
+  href: string;
+  title: string;
+}
+
+export const dashboardNavLinks: DashboardNavLinkProps[][] = [
+  [
+    {
+      href: "/dashboard/profile",
+      title: "View Profile",
+    },
+    {
+      href: "/dashboard/settings",
+      title: "Settings",
+    },
+    {
+      href: "/dashboard/notifications",
+      title: "Notifications",
+    },
+  ],
+  [
+    {
+      href: "/dashboard/desktopapp",
+      title: "Desktop App",
+    },
+    {
+      href: "/dashboard/support",
+      title: "Support",
+    },
+  ],
+  [
+    {
+      href: "/",
+      title: "Logout",
+    },
+  ],
+];
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -24,6 +64,7 @@ interface SidebarProps {
 function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
   const { user, status } = useUser();
   const router = useRouter();
+  const { trainings, status: trainingsStatus } = useGet30LatestTrainings();
 
   return (
     <>
@@ -48,19 +89,22 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           <h3
             className='px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider'
             id='mobile-teams-headline'>
-            Teams
+            Trainings (Last 30)
           </h3>
           <div
             className='mt-1 space-y-1'
             role='group'
             aria-labelledby='mobile-teams-headline'>
-            {teams.map((team, index) => (
+            {/* {teams.map((team, index) => (
               <SidebarMenuItem
                 key={index}
                 name={team.name}
                 href={team.href}
                 bgColorClass={team.bgColorClass}
               />
+            ))} */}
+            {trainings?.map((training, index) => (
+              <span key={index}>{formatDateSimple(training.createdAt)}</span>
             ))}
           </div>
         </div>
@@ -109,96 +153,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
               leaveFrom='transform opacity-100 scale-100'
               leaveTo='transform opacity-0 scale-95'>
               <Menu.Items className='z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none'>
-                <div className='py-1'>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href='#'
-                        className={clsx(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}>
-                        View profile
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href='#'
-                        className={clsx(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}>
-                        Settings
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href='#'
-                        className={clsx(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}>
-                        Notifications
-                      </a>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className='py-1'>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href='#'
-                        className={clsx(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}>
-                        Get desktop app
-                      </a>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href='#'
-                        className={clsx(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}>
-                        Support
-                      </a>
-                    )}
-                  </Menu.Item>
-                </div>
-                <div className='py-1'>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href='#'
-                        className={clsx(
-                          active
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-700",
-                          "block px-4 py-2 text-sm"
-                        )}>
-                        Logout
-                      </a>
-                    )}
-                  </Menu.Item>
-                </div>
+                <DashboardNavLinks navLinks={dashboardNavLinks} />
               </Menu.Items>
             </Transition>
           </Menu>
@@ -257,13 +212,13 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
               <h3
                 className='px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider'
                 id='desktop-teams-headline'>
-                Teams
+                Trainings (Last 30)
               </h3>
               <div
                 className='mt-1 space-y-1'
                 role='group'
                 aria-labelledby='desktop-teams-headline'>
-                {teams.map((team) => (
+                {/* {teams.map((team) => (
                   <a
                     key={team.name}
                     href={team.href}
@@ -277,6 +232,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                     />
                     <span className='truncate'>{team.name}</span>
                   </a>
+                ))} */}
+                {trainings?.map((training, index) => (
+                  <span key={index}>
+                    {formatDateSimple(training.createdAt)}
+                  </span>
                 ))}
               </div>
             </div>

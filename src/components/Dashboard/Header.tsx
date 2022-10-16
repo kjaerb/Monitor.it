@@ -8,6 +8,8 @@ import { projects } from "@/data/dashboardData";
 import { DotsVerticalIcon, SearchIcon } from "@heroicons/react/solid/index";
 import { formatDateSimple } from "@/utils/date";
 import Button from "../ui/Button/Button";
+import DashboardNavLinks from "./Navigation";
+import { dashboardNavLinks } from "./Sidebar";
 
 interface DashboardHeaderProps {
   setSidebarOpen: (open: boolean) => void;
@@ -74,96 +76,7 @@ function DashboardHeader({
                 leaveFrom='transform opacity-100 scale-100'
                 leaveTo='transform opacity-0 scale-95'>
                 <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none'>
-                  <div className='py-1'>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href='#'
-                          className={clsx(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}>
-                          View profile
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href='#'
-                          className={clsx(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}>
-                          Settings
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href='#'
-                          className={clsx(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}>
-                          Notifications
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </div>
-                  <div className='py-1'>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href='#'
-                          className={clsx(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}>
-                          Get desktop app
-                        </a>
-                      )}
-                    </Menu.Item>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href='#'
-                          className={clsx(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}>
-                          Support
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </div>
-                  <div className='py-1'>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href='#'
-                          className={clsx(
-                            active
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-700",
-                            "block px-4 py-2 text-sm"
-                          )}>
-                          Logout
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </div>
+                  <DashboardNavLinks navLinks={dashboardNavLinks} />
                 </Menu.Items>
               </Transition>
             </Menu>

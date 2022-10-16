@@ -8,7 +8,7 @@ import { Sport } from "@/types/sport";
 
 function InformationStep() {
   const { user } = useUser();
-  const { role, setRole, name, setName, incStep, sport, setSport, athlete } =
+  const { role, setRole, name, setName, incStep, sport, setSport } =
     useStepStore();
   const [formValidation, setFormValidation] = useState(false);
 
@@ -24,7 +24,7 @@ function InformationStep() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={clsx(
-              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer",
+              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-nonefocus:outline-none focus:ring-0 focus:border-gray-200 peer",
               user?.name && "placeholder:text-gray-100",
               formValidation && !name && "border-red-500"
             )}
@@ -41,7 +41,7 @@ function InformationStep() {
             value={sport}
             onChange={(e) => setSport(e.target.value as Sport)}
             className={clsx(
-              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer",
+              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer",
               formValidation && sport === undefined && "border-red-500"
             )}>
             <>
@@ -68,7 +68,7 @@ function InformationStep() {
             value={role}
             onChange={(e) => setRole(e.target.value as Role)}
             className={clsx(
-              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer",
+              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer",
               formValidation && role === undefined && "border-red-500"
             )}>
             <>

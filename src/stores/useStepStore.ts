@@ -4,7 +4,7 @@ import InformationStep from "@/components/MissingProfileInfo/InformationStep";
 import ProfileSummaryStep from "@/components/MissingProfileInfo/ProfileSummaryStep";
 import { Role } from "@/types/roles";
 import { Sport } from "@/types/sport";
-import { FIGAthlete } from "@prisma/client";
+import { Figathlete } from "@prisma/client";
 
 import create from "zustand";
 
@@ -45,8 +45,8 @@ interface useStepStoreProps {
   setSharingUsers: (users: string[]) => void;
   figLicense: string;
   setFigLicense: (license: string) => void;
-  athlete?: FIGAthlete;
-  setAthlete: (athlete?: FIGAthlete) => void;
+  athlete?: Figathlete;
+  setAthlete: (athlete?: Figathlete) => void;
 }
 
 export const useStepStore = create<useStepStoreProps>((set) => ({

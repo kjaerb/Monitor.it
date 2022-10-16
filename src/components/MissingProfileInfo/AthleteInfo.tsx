@@ -1,50 +1,89 @@
 import { useStepStore } from "stores/useStepStore";
-import Loading from "../ui/Loading/Loading";
+import NoUser from "@/assets/img/no_user.png";
+import Image from "next/image";
+import { formatDateSimple } from "@/utils/date";
+import { FIGAthlete } from "@prisma/client";
+import clsx from "clsx";
 
 interface props {
-  hasSearched: boolean;
+  minimal?: boolean;
+  className?: string;
 }
 
-function AthleteInfo({ hasSearched }: props) {
-  const { athlete } = useStepStore();
+function AthleteInfo({ minimal = true, className }: props) {
+  const { athlete, role } = useStepStore();
 
   return (
-    <div className='w-1/2 relative max-w-sm mx-auto min-w-0 break-words bg-white mb-6 shadow-lg rounded-xl mt-16'>
-      {hasSearched ? (
-        athlete ? (
-          <div className='px-6'>
-            <div className='flex flex-wrap justify-center'>
-              <div className='w-full flex justify-center'>
-                <img
-                  src={athlete?.figImgUrl}
-                  className='shadow-xl object-top rounded-full w-32 h-32 object-cover -mt-16'
-                />
-              </div>
-            </div>
-            <div className='text-center mt-2'>
-              <h3 className='text-2xl text-slate-700 font-bold leading-normal mb-1'>
-                {athlete?.preferredfirstname} {athlete?.preferredlastname}
-              </h3>
-              <div className='text-xs mt-0 mb-4 text-slate-400 font-bold uppercase'>
-                <i className='fas fa-map-marker-alt mr-2 text-slate-400 opacity-75'></i>
-                {athlete?.country}
-              </div>
-            </div>
+    <div
+      className={clsx(
+        "w-full relative max-w-sm mx-auto min-w-0 break-words bg-white mb-6 shadow-lg rounded-xl mt-16",
+        className
+      )}>
+      <div className='px-6'>
+        <div className='flex flex-wrap justify-center'>
+          <div className='w-full flex justify-center -mt-16'>
+            {athlete ? (
+              <img
+                src={athlete?.figImgUrl}
+                className='shadow-xl object-top rounded-full w-32 h-32 object-cover'
+              />
+            ) : (
+              <Image
+                src={NoUser}
+                width={128}
+                height={128}
+                className='shadow-xl rounded-full'
+              />
+            )}
           </div>
-        ) : (
-          <div className='w-full h-full flex items-center justify-center'>
-            <h3 className='text-xl text-red-500 font-bold leading-normal mb-1'>
-              No athlete found
-            </h3>
-          </div>
-        )
-      ) : (
-        <div className='w-full h-full flex items-center justify-center'>
-          <h3 className='text-xl text-slate-700 font-bold leading-normal mb-1'>
-            Search for an athlete
-          </h3>
         </div>
-      )}
+        <div className='text-center mt-2'>
+          {athlete ? (
+            <h3 className='text-2xl text-slate-700 font-bold leading-normal mb-1'>
+              {athlete?.preferredfirstname} {athlete?.preferredlastname}
+            </h3>
+          ) : (
+            <h3 className='text-2xl text-slate-700 font-bold leading-normal mb-1'>
+              Search for an athlete
+            </h3>
+          )}
+
+          <div className='grid grid-cols-1 divide-y-2 text-slate-700 py-2'>
+            <div className='grid grid-cols-3 divide-x-2 text-slate-700 py-2'>
+              <div className='flex justify-center items-center flex-col'>
+                <span className='font-bold'>Country</span>
+                {athlete ? <span>{athlete?.country}</span> : <span>?</span>}
+              </div>
+              <div className='flex justify-center items-center flex-col'>
+                <span className='font-bold'>Sport</span>
+                {athlete ? <span>{athlete?.discipline}</span> : <span>?</span>}
+              </div>
+              <div className='flex justify-center items-center flex-col'>
+                <span className='font-bold'>Valid to</span>
+                {athlete ? (
+                  <span>{formatDateSimple(athlete?.validto)}</span>
+                ) : (
+                  <span>?</span>
+                )}
+              </div>
+            </div>
+            {!minimal && (
+              <div className='grid grid-cols-3 divide-x-2 text-slate-700 py-2'>
+                <div className='flex justify-center items-center flex-col'>
+                  <span className='font-bold'>WIP</span>
+                </div>
+                <div className='flex justify-center items-center flex-col'>
+                  <span className='font-bold'>Role</span>
+                  {role && <span>{role}</span>}
+                </div>
+                <div className='flex justify-center items-center flex-col'>
+                  <span className='font-bold'>WIP</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

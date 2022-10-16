@@ -1,18 +1,15 @@
 import { trpc } from "@/utils/trpc";
 
-export function getProfile() {
-  const { data, status } = trpc.useQuery(["profile.getProfile"]);
-
-  return {
-    profile: data?.result,
-    status,
-  };
-}
-
 export function useCreateProfile() {
-  const { mutate: createProfile } = trpc.useMutation("profile.createProfile");
+  const utils = trpc.useContext();
+
+  const { mutate } = trpc.useMutation("profile.createProfile", {
+    onSuccess() {
+      utils.invalidateQueries(["user.getUser"]);
+    },
+  });
 
   return {
-    createProfile,
+    createProfile: mutate,
   };
 }
