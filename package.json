@@ -70,7 +70,8 @@
       "prettier -w"
     ],
     "*.{ts,tsx}": [
-      "eslint --fix"
+      "eslint --fix",
+      "prettier -w"
     ],
     "src/**/*.{json,css,scss,md}": [
       "prettier -w"
