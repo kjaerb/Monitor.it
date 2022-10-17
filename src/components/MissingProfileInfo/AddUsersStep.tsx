@@ -1,4 +1,4 @@
-import StepNavigation from "./StepNavigation";
+import StepNavigation from './StepNavigation';
 
 function AddUserStep() {
   return (

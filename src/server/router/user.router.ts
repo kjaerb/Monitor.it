@@ -1,20 +1,20 @@
-import { z } from "zod";
-import { createRouter } from "@/server/createRouter";
+import { z } from 'zod';
+import { createRouter } from '@/server/createRouter';
 import {
   getUserByEmail,
   updateUserImage,
-} from "@/server/controller/user.controller";
-import { TRPCError } from "@trpc/server";
+} from '@/server/controller/user.controller';
+import { TRPCError } from '@trpc/server';
 
 export const userRouter = createRouter()
-  .query("getUser", {
+  .query('getUser', {
     async resolve({ ctx }) {
       const email = ctx.session?.user?.email;
 
       if (!email) {
         throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You must be logged in to access this resource.",
+          code: 'UNAUTHORIZED',
+          message: 'You must be logged in to access this resource.',
         });
       }
       const user = await getUserByEmail(email);
@@ -22,7 +22,7 @@ export const userRouter = createRouter()
       return { user };
     },
   })
-  .mutation("updateUserImage", {
+  .mutation('updateUserImage', {
     input: z.object({
       imageURL: z.string(),
     }),
@@ -31,8 +31,8 @@ export const userRouter = createRouter()
 
       if (!email) {
         throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You must be logged in to access this resource.",
+          code: 'UNAUTHORIZED',
+          message: 'You must be logged in to access this resource.',
         });
       }
 

@@ -1,5 +1,5 @@
-import { prisma } from "@/utils/prisma";
-import { TRPCError } from "@trpc/server";
+import { prisma } from '@/utils/prisma';
+import { TRPCError } from '@trpc/server';
 
 export async function getTrainingById(id: string) {
   return await prisma.training.findUnique({
@@ -18,8 +18,8 @@ export async function get30LatestTrainings(email: string) {
 
   if (!user) {
     throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "Profile not found",
+      code: 'NOT_FOUND',
+      message: 'Profile not found',
     });
   }
 
@@ -29,7 +29,7 @@ export async function get30LatestTrainings(email: string) {
       userId: email,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
 }

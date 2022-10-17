@@ -6,11 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "postinstall": "prisma generate",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "tsc": "tsc --noEmit",
+    "tsc:skip": "tsc --noEmit --skipLibCheck",
+    "test:watch": "jest --watch",
+    "lint": "next lint",
+    "lint:fix": "eslint src --fix && pnpm run format",
+    "lint:strict": "eslint src",
+    "format": "prettier -w .",
+    "format:check": "prettier -c ."
   },
   "dependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@headlessui/react": "^1.7.2",
     "@next-auth/prisma-adapter": "^1.0.4",
     "@prisma/client": "^4.4.0",
@@ -25,6 +34,7 @@
     "next-auth": "^4.12.0",
     "nextjs-progressbar": "^0.0.14",
     "outline": "link:@heroicons/react/outline",
+    "prettier": "^2.7.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "3.39.2",
@@ -52,5 +62,17 @@
   },
   "ct3aMetadata": {
     "initVersion": "5.13.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,}": [
+      "eslint --max-warnings 0 --fix",
+      "prettier -w"
+    ],
+    "*.{ts,tsx}": [
+      "eslint --cache --fix"
+    ],
+    "src/**/*.{json,css,scss,md}": [
+      "prettier -w"
+    ]
   }
 }

@@ -1,5 +1,5 @@
-import { LandingPageFooter } from "@/components/Layouts/Footer";
-import { LandingPageHeader } from "@/components/Layouts/Header";
+import { LandingPageFooter } from '@/components/Layouts/Footer';
+import { LandingPageHeader } from '@/components/Layouts/Header';
 
 interface LandingPageLayoutProps {
   children?: React.ReactNode;

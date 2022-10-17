@@ -1,8 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Dialog, Transition } from "@headlessui/react";
-import clsx from "clsx";
-import { Fragment } from "react";
-import { modalVariant } from "./Modal";
+import { Dialog, Transition } from '@headlessui/react';
+import clsx from 'clsx';
+import { Fragment } from 'react';
+import { modalVariant } from './Modal';
 
 interface ModalProps {
   isOpen: boolean;
@@ -13,7 +13,7 @@ interface ModalProps {
 
 export default function Modal({
   isOpen,
-  variant = "primary",
+  variant = 'primary',
   setIsOpen = () => null,
   children,
 }: ModalProps) {
@@ -27,7 +27,8 @@ export default function Modal({
           enterTo='opacity-100'
           leave='ease-in duration-200'
           leaveFrom='opacity-100'
-          leaveTo='opacity-0'>
+          leaveTo='opacity-0'
+        >
           <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' />
         </Transition.Child>
 
@@ -40,12 +41,14 @@ export default function Modal({
               enterTo='opacity-100 translate-y-0 sm:scale-100'
               leave='ease-in duration-200'
               leaveFrom='opacity-100 translate-y-0 sm:scale-100'
-              leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'>
+              leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+            >
               <Dialog.Panel
                 className={clsx(
                   modalVariant[variant],
-                  "relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl sm:p-6"
-                )}>
+                  'relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-5xl sm:p-6'
+                )}
+              >
                 {children}
               </Dialog.Panel>
             </Transition.Child>

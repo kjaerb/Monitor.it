@@ -1,10 +1,10 @@
-import { useUser } from "@/hooks/useUser";
-import { Role } from "@/types/roles";
-import clsx from "clsx";
-import { useState } from "react";
-import { useStepStore } from "stores/useStepStore";
-import StepNavigation from "./StepNavigation";
-import { Sport } from "@/types/sport";
+import { useUser } from '@/hooks/useUser';
+import { Role } from '@/types/roles';
+import clsx from 'clsx';
+import { useState } from 'react';
+import { useStepStore } from 'stores/useStepStore';
+import StepNavigation from './StepNavigation';
+import { Sport } from '@/types/sport';
 
 function InformationStep() {
   const { user } = useUser();
@@ -24,11 +24,11 @@ function InformationStep() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={clsx(
-              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-nonefocus:outline-none focus:ring-0 focus:border-gray-200 peer",
-              user?.name && "placeholder:text-gray-100",
-              formValidation && !name && "border-red-500"
+              'block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-nonefocus:outline-none focus:ring-0 focus:border-gray-200 peer',
+              user?.name && 'placeholder:text-gray-100',
+              formValidation && !name && 'border-red-500'
             )}
-            placeholder={"Enter name"}
+            placeholder={'Enter name'}
           />
         </div>
         <div className='mt-4'>
@@ -41,9 +41,10 @@ function InformationStep() {
             value={sport}
             onChange={(e) => setSport(e.target.value as Sport)}
             className={clsx(
-              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer",
-              formValidation && sport === undefined && "border-red-500"
-            )}>
+              'block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer',
+              formValidation && sport === undefined && 'border-red-500'
+            )}
+          >
             <>
               <option>Select a sport</option>
               {Object.values(Sport).map((sport) => {
@@ -68,9 +69,10 @@ function InformationStep() {
             value={role}
             onChange={(e) => setRole(e.target.value as Role)}
             className={clsx(
-              "block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer",
-              formValidation && role === undefined && "border-red-500"
-            )}>
+              'block py-2.5 px-0 w-full text-sm text-gray-100 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-gray-200 peer',
+              formValidation && role === undefined && 'border-red-500'
+            )}
+          >
             <>
               <option>Select a role</option>
               {Object.values(Role).map((role) => {

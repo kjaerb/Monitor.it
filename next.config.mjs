@@ -1,4 +1,4 @@
-import { env } from "./src/env/server.mjs";
+import { env } from './src/env/server.mjs';
 
 /**
  * Don't be scared of the generics here.
@@ -17,15 +17,15 @@ export default defineNextConfig({
   swcMinify: true,
   // Next.js i18n docs: https://nextjs.org/docs/advanced-features/i18n-routing
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ['en'],
+    defaultLocale: 'en',
   },
   images: {
     minimumCacheTTL: 60,
     domains: [
-      "images.unsplash.com",
-      "lh3.googleusercontent.com",
-      "www.gymnastics.sport",
+      'images.unsplash.com',
+      'lh3.googleusercontent.com',
+      'www.gymnastics.sport',
     ],
   },
 });

@@ -1,6 +1,6 @@
-import { prisma } from "@/utils/prisma";
-import { Figathlete } from "@prisma/client";
-import { TRPCError } from "@trpc/server";
+import { prisma } from '@/utils/prisma';
+import { Figathlete } from '@prisma/client';
+import { TRPCError } from '@trpc/server';
 
 export async function getProfile(email: string) {
   const user = await prisma.user.findFirst({
@@ -14,15 +14,15 @@ export async function getProfile(email: string) {
 
   if (!user) {
     throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "User not found",
+      code: 'NOT_FOUND',
+      message: 'User not found',
     });
   }
 
   if (!user?.profile) {
     throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "Profile not found",
+      code: 'NOT_FOUND',
+      message: 'Profile not found',
     });
   }
 
@@ -56,8 +56,8 @@ export async function createProfile({
 
   if (!profile) {
     throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "Profile not found",
+      code: 'NOT_FOUND',
+      message: 'Profile not found',
     });
   }
 

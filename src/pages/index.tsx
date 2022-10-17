@@ -1,9 +1,9 @@
-import LandingPageLayout from "layouts/LandingPageLayout";
-import { NextPage } from "next/types";
-import Image from "next/image";
-import dashboardImage from "@/assets/img/dashboard.png";
-import Button from "@/components/ui/Button/Button";
-import { useSession } from "next-auth/react";
+import LandingPageLayout from 'layouts/LandingPageLayout';
+import { NextPage } from 'next/types';
+import Image from 'next/image';
+import dashboardImage from '@/assets/img/dashboard.png';
+import Button from '@/components/ui/Button/Button';
+import { useSession } from 'next-auth/react';
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
@@ -27,7 +27,8 @@ const Home: NextPage = () => {
                 <Button
                   href='/dashboard'
                   variant='ternary'
-                  className='px-0 py-0'>
+                  className='px-0 py-0'
+                >
                   <div className='relative'>
                     <div className='px-4 py-2 rounded-lg shadow-2xl'>
                       Go to dashboard
@@ -49,7 +50,7 @@ const Home: NextPage = () => {
           <div className='pl-20'>
             <Image
               src={dashboardImage}
-              alt={"dashboard"}
+              alt={'dashboard'}
               width={2800 / 2}
               height={1962 / 2}
             />

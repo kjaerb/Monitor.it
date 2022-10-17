@@ -1,5 +1,5 @@
-import AthleteInfo from "./AthleteInfo";
-import StepNavigation from "./StepNavigation";
+import AthleteInfo from './AthleteInfo';
+import StepNavigation from './StepNavigation';
 
 interface ProfileSummaryStepProps {
   setModalClose: (arg: boolean) => void;

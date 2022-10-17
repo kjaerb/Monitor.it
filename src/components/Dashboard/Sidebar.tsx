@@ -1,18 +1,18 @@
-import clsx from "clsx";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { SearchIcon, SelectorIcon } from "@heroicons/react/solid/index";
-import { navigation } from "@/data/dashboardData";
-import { AvatarImage } from "@/components/ui/Image/AvatarImage";
-import { SidebarMenuItemIcon } from "@/components/Sidebar/SidebarMenuItem";
-import SidebarMobile from "@/components/Sidebar/SidebarMobile";
-import monitorItLogo from "@/assets/img/Monitor.it-inverse.png";
-import { useUser } from "@/hooks/useUser";
-import DashboardNavLinks from "./Navigation";
-import { useGet30LatestTrainings } from "@/hooks/useTraining";
-import { formatDateSimple } from "@/utils/date";
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import { Fragment } from 'react';
+import { Menu, Transition } from '@headlessui/react';
+import { SearchIcon, SelectorIcon } from '@heroicons/react/solid/index';
+import { navigation } from '@/data/dashboardData';
+import { AvatarImage } from '@/components/ui/Image/AvatarImage';
+import { SidebarMenuItemIcon } from '@/components/Sidebar/SidebarMenuItem';
+import SidebarMobile from '@/components/Sidebar/SidebarMobile';
+import monitorItLogo from '@/assets/img/Monitor.it-inverse.png';
+import { useUser } from '@/hooks/useUser';
+import DashboardNavLinks from './Navigation';
+import { useGet30LatestTrainings } from '@/hooks/useTraining';
+import { formatDateSimple } from '@/utils/date';
 
 export interface DashboardNavLinkProps {
   href: string;
@@ -22,32 +22,32 @@ export interface DashboardNavLinkProps {
 export const dashboardNavLinks: DashboardNavLinkProps[][] = [
   [
     {
-      href: "/dashboard/profile",
-      title: "View Profile",
+      href: '/dashboard/profile',
+      title: 'View Profile',
     },
     {
-      href: "/dashboard/settings",
-      title: "Settings",
+      href: '/dashboard/settings',
+      title: 'Settings',
     },
     {
-      href: "/dashboard/notifications",
-      title: "Notifications",
-    },
-  ],
-  [
-    {
-      href: "/dashboard/desktopapp",
-      title: "Desktop App",
-    },
-    {
-      href: "/dashboard/support",
-      title: "Support",
+      href: '/dashboard/notifications',
+      title: 'Notifications',
     },
   ],
   [
     {
-      href: "/",
-      title: "Logout",
+      href: '/dashboard/desktopapp',
+      title: 'Desktop App',
+    },
+    {
+      href: '/dashboard/support',
+      title: 'Support',
+    },
+  ],
+  [
+    {
+      href: '/',
+      title: 'Logout',
     },
   ],
 ];
@@ -67,7 +67,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
       <SidebarMobile
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
-        imgSrc={monitorItLogo}>
+        imgSrc={monitorItLogo}
+      >
         <div className='space-y-1'>
           {navigation.map((item, index) => (
             <SidebarMenuItemIcon
@@ -84,13 +85,15 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
         <div className='mt-8'>
           <h3
             className='px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider'
-            id='mobile-teams-headline'>
+            id='mobile-teams-headline'
+          >
             Trainings (Last 30)
           </h3>
           <div
             className='mt-1 space-y-1'
             role='group'
-            aria-labelledby='mobile-teams-headline'>
+            aria-labelledby='mobile-teams-headline'
+          >
             {/* {teams.map((team, index) => (
               <SidebarMenuItem
                 key={index}
@@ -109,7 +112,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
       <div className='hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100'>
         <div className='flex items-center flex-shrink-0 px-6'>
           <Image
-            onClick={() => router.push("/")}
+            onClick={() => router.push('/')}
             className='h-8 w-auto cursor-pointer'
             src={monitorItLogo}
             alt='monitor.it'
@@ -147,7 +150,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
               enterTo='transform opacity-100 scale-100'
               leave='transition ease-in duration-75'
               leaveFrom='transform opacity-100 scale-100'
-              leaveTo='transform opacity-0 scale-95'>
+              leaveTo='transform opacity-0 scale-95'
+            >
               <Menu.Items className='z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none'>
                 <DashboardNavLinks navLinks={dashboardNavLinks} />
               </Menu.Items>
@@ -161,7 +165,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
             <div className='mt-1 relative rounded-md shadow-sm'>
               <div
                 className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'
-                aria-hidden='true'>
+                aria-hidden='true'
+              >
                 <SearchIcon
                   className='mr-3 h-4 w-4 text-gray-400'
                   aria-hidden='true'
@@ -185,17 +190,18 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                   href={item.href}
                   className={clsx(
                     item.current
-                      ? "bg-gray-200 text-gray-900"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-50",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                      ? 'bg-gray-200 text-gray-900'
+                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                   )}
-                  aria-current={item.current ? "page" : undefined}>
+                  aria-current={item.current ? 'page' : undefined}
+                >
                   <item.icon
                     className={clsx(
                       item.current
-                        ? "text-gray-500"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
+                        ? 'text-gray-500'
+                        : 'text-gray-400 group-hover:text-gray-500',
+                      'mr-3 flex-shrink-0 h-6 w-6'
                     )}
                     aria-hidden='true'
                   />
@@ -207,13 +213,15 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
               {/* Secondary navigation */}
               <h3
                 className='px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider'
-                id='desktop-teams-headline'>
+                id='desktop-teams-headline'
+              >
                 Trainings (Last 30)
               </h3>
               <div
                 className='mt-1 space-y-1'
                 role='group'
-                aria-labelledby='desktop-teams-headline'>
+                aria-labelledby='desktop-teams-headline'
+              >
                 {/* {teams.map((team) => (
                   <a
                     key={team.name}

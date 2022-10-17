@@ -1,12 +1,12 @@
-import { useUser } from "@/hooks/useUser";
-import { useState } from "react";
-import Modal from "@/components/Modal/Modal";
-import { useStepStore } from "stores/useStepStore";
-import InformationStep from "./InformationStep";
-import AddUserStep from "./AddUsersStep";
-import ProfileSummaryStep from "./ProfileSummaryStep";
-import Steps from "./Steps";
-import FigLicenseStep from "./FigLicenseStep";
+import { useUser } from '@/hooks/useUser';
+import { useState } from 'react';
+import Modal from '@/components/Modal/Modal';
+import { useStepStore } from 'stores/useStepStore';
+import InformationStep from './InformationStep';
+import AddUserStep from './AddUsersStep';
+import ProfileSummaryStep from './ProfileSummaryStep';
+import Steps from './Steps';
+import FigLicenseStep from './FigLicenseStep';
 
 function StepContainer() {
   const { user, hasProfile } = useUser();
@@ -14,7 +14,7 @@ function StepContainer() {
   const { step } = useStepStore();
 
   return (
-    <Modal isOpen={!hasProfile} variant={"primary"} setIsOpen={setModalOpen}>
+    <Modal isOpen={!hasProfile} variant={'primary'} setIsOpen={setModalOpen}>
       {/* Thanks to https://github.com/Fedeorlandau for the template for the modal */}
       <div className='mb-4'>
         <span className='text-white text-xl'>

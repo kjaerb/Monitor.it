@@ -1,8 +1,8 @@
-import { useStepStore } from "stores/useStepStore";
-import NoUser from "@/assets/img/no_user.png";
-import { formatDateSimple } from "@/utils/date";
-import clsx from "clsx";
-import { AvatarImage } from "@/components/ui/Image/AvatarImage";
+import { useStepStore } from 'stores/useStepStore';
+import NoUser from '@/assets/img/no_user.png';
+import { formatDateSimple } from '@/utils/date';
+import clsx from 'clsx';
+import { AvatarImage } from '@/components/ui/Image/AvatarImage';
 
 interface props {
   minimal?: boolean;
@@ -15,9 +15,10 @@ function AthleteInfo({ minimal = true, className }: props) {
   return (
     <div
       className={clsx(
-        "w-full relative max-w-sm mx-auto min-w-0 break-words bg-white mb-6 shadow-lg rounded-xl mt-16",
+        'w-full relative max-w-sm mx-auto min-w-0 break-words bg-white mb-6 shadow-lg rounded-xl mt-16',
         className
-      )}>
+      )}
+    >
       <div className='px-6'>
         <div className='flex flex-wrap justify-center'>
           <div className='w-full flex justify-center -mt-16'>

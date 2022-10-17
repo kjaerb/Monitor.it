@@ -1,10 +1,10 @@
-import { trpc } from "@/utils/trpc";
-import { useSession } from "next-auth/react";
-import { useMemo } from "react";
+import { trpc } from '@/utils/trpc';
+import { useSession } from 'next-auth/react';
+import { useMemo } from 'react';
 
 export function useUser() {
   const { data: session } = useSession();
-  const { data, status } = trpc.useQuery(["user.getUser"]);
+  const { data, status } = trpc.useQuery(['user.getUser']);
 
   const hasProfile = useMemo(() => {
     return data?.user?.profile !== null;
@@ -22,10 +22,10 @@ export function useUpdateUserImage() {
   const utils = trpc.useContext();
 
   const { mutate, isLoading, isSuccess } = trpc.useMutation(
-    "user.updateUserImage",
+    'user.updateUserImage',
     {
       onSuccess() {
-        utils.invalidateQueries(["user.getUser"]);
+        utils.invalidateQueries(['user.getUser']);
       },
     }
   );

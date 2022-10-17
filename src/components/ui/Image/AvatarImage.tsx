@@ -1,6 +1,6 @@
-import clsx from "clsx";
-import Image, { StaticImageData } from "next/image";
-import Loading from "@/components/ui/Loading/Loading";
+import clsx from 'clsx';
+import Image, { StaticImageData } from 'next/image';
+import Loading from '@/components/ui/Loading/Loading';
 
 interface AvatarProps {
   src?: string | null | StaticImageData;
@@ -12,7 +12,7 @@ interface AvatarProps {
 
 export function AvatarImage({
   src,
-  alt = "avatar",
+  alt = 'avatar',
   className,
   width,
   height,
@@ -22,9 +22,9 @@ export function AvatarImage({
       {src ? (
         <Image
           src={src}
-          alt={alt ? alt : "avatar img"}
+          alt={alt ? alt : 'avatar img'}
           className={clsx(
-            "shadow-xl object-top rounded-full w-32 h-32 object-cover",
+            'shadow-xl object-top rounded-full w-32 h-32 object-cover',
             className
           )}
           width={width ? width : 16}

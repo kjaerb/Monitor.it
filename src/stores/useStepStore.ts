@@ -1,32 +1,32 @@
-import AddUserStep from "@/components/MissingProfileInfo/AddUsersStep";
-import FigLicenseStep from "@/components/MissingProfileInfo/FigLicenseStep";
-import InformationStep from "@/components/MissingProfileInfo/InformationStep";
-import ProfileSummaryStep from "@/components/MissingProfileInfo/ProfileSummaryStep";
-import { Role } from "@/types/roles";
-import { Sport } from "@/types/sport";
-import { Figathlete } from "@prisma/client";
+import AddUserStep from '@/components/MissingProfileInfo/AddUsersStep';
+import FigLicenseStep from '@/components/MissingProfileInfo/FigLicenseStep';
+import InformationStep from '@/components/MissingProfileInfo/InformationStep';
+import ProfileSummaryStep from '@/components/MissingProfileInfo/ProfileSummaryStep';
+import { Role } from '@/types/roles';
+import { Sport } from '@/types/sport';
+import { Figathlete } from '@prisma/client';
 
-import create from "zustand";
+import create from 'zustand';
 
 export const steps = [
   {
     step: 0,
-    title: "FIG License",
+    title: 'FIG License',
     component: FigLicenseStep,
   },
   {
     step: 1,
-    title: "Information",
+    title: 'Information',
     component: InformationStep,
   },
   {
     step: 2,
-    title: "Add users",
+    title: 'Add users',
     component: AddUserStep,
   },
   {
     step: 3,
-    title: "Profile summary",
+    title: 'Profile summary',
     component: ProfileSummaryStep,
   },
 ];
@@ -61,7 +61,7 @@ export const useStepStore = create<useStepStoreProps>((set) => ({
   setName: (name) => set({ name }),
   sharingUsers: [],
   setSharingUsers: (users) => set({ sharingUsers: users }),
-  figLicense: "",
+  figLicense: '',
   setFigLicense: (license) => set({ figLicense: license }),
   athlete: undefined,
   setAthlete: (athlete) => set({ athlete }),

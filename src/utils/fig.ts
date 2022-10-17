@@ -1,5 +1,5 @@
-import { Figathlete } from "@prisma/client";
-import axios from "axios";
+import { Figathlete } from '@prisma/client';
+import axios from 'axios';
 
 export async function getFigLicense(license: string) {
   return await axios
@@ -21,9 +21,9 @@ export async function getFigImg(gymnastId: number): Promise<string> {
   return await axios
     .get(`https://www.gymnastics.sport/asset.php?id=bpic_${gymnastId}`, {
       headers: {
-        "Content-Type": "image/jpeg",
-        "Access-Control-Allow-Origin": "GET",
-        mode: "no-cors",
+        'Content-Type': 'image/jpeg',
+        'Access-Control-Allow-Origin': 'GET',
+        mode: 'no-cors',
       },
     })
     .then((res) => {

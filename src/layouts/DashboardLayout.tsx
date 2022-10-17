@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import Sidebar from "@/components/Dashboard/Sidebar";
-import DashboardHeader from "@/components/Dashboard/Header";
-import { useUser } from "@/hooks/useUser";
-import StepContainer from "@/components/MissingProfileInfo/StepContainer";
-import clsx from "clsx";
+import Sidebar from '@/components/Dashboard/Sidebar';
+import DashboardHeader from '@/components/Dashboard/Header';
+import { useUser } from '@/hooks/useUser';
+import StepContainer from '@/components/MissingProfileInfo/StepContainer';
+import clsx from 'clsx';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -44,9 +44,10 @@ export default function DashboardLayout({
           />
           <main
             className={clsx(
-              "flex-1 mt-8",
-              showPinned && "border-t border-gray-200"
-            )}>
+              'flex-1 mt-8',
+              showPinned && 'border-t border-gray-200'
+            )}
+          >
             {/* Page title & actions */}
             <div className='mt-2 px-4 sm:px-6 lg:px-8'>
               <StepContainer />

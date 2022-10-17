@@ -1,11 +1,11 @@
-import clsx from "clsx";
-import { useState } from "react";
-import { useStepStore } from "stores/useStepStore";
-import AthleteInfo from "./AthleteInfo";
-import StepNavigation from "./StepNavigation";
-import { getFigLicense } from "@/utils/fig";
-import { getSport } from "@/types/sport";
-import { Role } from "@/types/roles";
+import clsx from 'clsx';
+import { useState } from 'react';
+import { useStepStore } from 'stores/useStepStore';
+import AthleteInfo from './AthleteInfo';
+import StepNavigation from './StepNavigation';
+import { getFigLicense } from '@/utils/fig';
+import { getSport } from '@/types/sport';
+import { Role } from '@/types/roles';
 
 function FigLicenseStep() {
   const [hasSearched, setHasSearched] = useState(false);
@@ -33,30 +33,32 @@ function FigLicenseStep() {
           </label>
           <form
             className='flex'
-            onSubmit={async (e) => handleFigLicenseSearch(e)}>
+            onSubmit={async (e) => handleFigLicenseSearch(e)}
+          >
             <input
               value={figLicense}
               onChange={(e) => setFigLicense(e.target.value)}
               className={clsx(
-                "py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none  peer",
+                'py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none  peer',
                 hasSearched
                   ? !athlete
-                    ? "border-red-500"
-                    : "border-green-500"
-                  : ""
+                    ? 'border-red-500'
+                    : 'border-green-500'
+                  : ''
               )}
-              placeholder={"Enter FIG License"}
+              placeholder={'Enter FIG License'}
             />
             <button
               type='submit'
               className={clsx(
-                "py-2.5 px-0 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none peer",
+                'py-2.5 px-0 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none peer',
                 hasSearched
                   ? !athlete
-                    ? "border-red-500"
-                    : "border-green-500"
-                  : ""
-              )}>
+                    ? 'border-red-500'
+                    : 'border-green-500'
+                  : ''
+              )}
+            >
               Search
             </button>
           </form>
@@ -91,7 +93,7 @@ function FigLicenseStep() {
           validto: new Date(athlete.validto),
           createdAt: new Date(),
           updatedAt: new Date(),
-          profileId: "",
+          profileId: '',
         });
         setName(
           `${athlete.preferredfirstname} ${transformName(
@@ -102,8 +104,8 @@ function FigLicenseStep() {
         setRole(Role.ATHLETE);
       } else {
         setAthlete(undefined);
-        setName("");
-        setSport(getSport(""));
+        setName('');
+        setSport(getSport(''));
         setRole(Role.UNDEFINED);
       }
     });

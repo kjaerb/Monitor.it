@@ -1,15 +1,15 @@
-import { Menu, Transition } from "@headlessui/react";
-import { Session } from "next-auth";
-import { Fragment } from "react";
-import { MenuAlt1Icon } from "@heroicons/react/outline/index";
-import clsx from "clsx";
-import { AvatarImage } from "@/components/ui/Image/AvatarImage";
-import { projects } from "@/data/dashboardData";
-import { DotsVerticalIcon, SearchIcon } from "@heroicons/react/solid/index";
-import { formatDateSimple } from "@/utils/date";
-import Button from "@/components/ui/Button/Button";
-import DashboardNavLinks from "./Navigation";
-import { dashboardNavLinks } from "./Sidebar";
+import { Menu, Transition } from '@headlessui/react';
+import { Session } from 'next-auth';
+import { Fragment } from 'react';
+import { MenuAlt1Icon } from '@heroicons/react/outline/index';
+import clsx from 'clsx';
+import { AvatarImage } from '@/components/ui/Image/AvatarImage';
+import { projects } from '@/data/dashboardData';
+import { DotsVerticalIcon, SearchIcon } from '@heroicons/react/solid/index';
+import { formatDateSimple } from '@/utils/date';
+import Button from '@/components/ui/Button/Button';
+import DashboardNavLinks from './Navigation';
+import { dashboardNavLinks } from './Sidebar';
 
 interface DashboardHeaderProps {
   setSidebarOpen: (open: boolean) => void;
@@ -30,7 +30,8 @@ function DashboardHeader({
         <button
           type='button'
           className='px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden'
-          onClick={() => setSidebarOpen(true)}>
+          onClick={() => setSidebarOpen(true)}
+        >
           <span className='sr-only'>Open sidebar</span>
           <MenuAlt1Icon className='h-6 w-6' aria-hidden='true' />
         </button>
@@ -74,7 +75,8 @@ function DashboardHeader({
                 enterTo='transform opacity-100 scale-100'
                 leave='transition ease-in duration-75'
                 leaveFrom='transform opacity-100 scale-100'
-                leaveTo='transform opacity-0 scale-95'>
+                leaveTo='transform opacity-0 scale-95'
+              >
                 <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none'>
                   <DashboardNavLinks navLinks={dashboardNavLinks} />
                 </Menu.Items>
@@ -110,23 +112,27 @@ function DashboardHeader({
             </h2>
             <ul
               role='list'
-              className='grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3'>
+              className='grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-4 mt-3'
+            >
               {pinnedProjects.map((project) => (
                 <li
                   key={project.id}
-                  className='relative col-span-1 flex shadow-sm rounded-md'>
+                  className='relative col-span-1 flex shadow-sm rounded-md'
+                >
                   <div
                     className={clsx(
                       project.bgColorClass,
-                      "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
-                    )}>
+                      'flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md'
+                    )}
+                  >
                     {project.initials}
                   </div>
                   <div className='flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate'>
                     <div className='flex-1 px-4 py-2 text-sm truncate'>
                       <a
                         href='#'
-                        className='text-gray-900 font-medium hover:text-gray-600'>
+                        className='text-gray-900 font-medium hover:text-gray-600'
+                      >
                         {project.title}
                       </a>
                       <p className='text-gray-500'>
@@ -148,7 +154,8 @@ function DashboardHeader({
                         enterTo='transform opacity-100 scale-100'
                         leave='transition ease-in duration-75'
                         leaveFrom='transform opacity-100 scale-100'
-                        leaveTo='transform opacity-0 scale-95'>
+                        leaveTo='transform opacity-0 scale-95'
+                      >
                         <Menu.Items className='z-10 mx-3 origin-top-right absolute right-10 top-3 w-48 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none'>
                           <div className='py-1'>
                             <Menu.Item>
@@ -157,10 +164,11 @@ function DashboardHeader({
                                   href='#'
                                   className={clsx(
                                     active
-                                      ? "bg-gray-100 text-gray-900"
-                                      : "text-gray-700",
-                                    "block px-4 py-2 text-sm"
-                                  )}>
+                                      ? 'bg-gray-100 text-gray-900'
+                                      : 'text-gray-700',
+                                    'block px-4 py-2 text-sm'
+                                  )}
+                                >
                                   View
                                 </a>
                               )}
@@ -173,10 +181,11 @@ function DashboardHeader({
                                   href='#'
                                   className={clsx(
                                     active
-                                      ? "bg-gray-100 text-gray-900"
-                                      : "text-gray-700",
-                                    "block px-4 py-2 text-sm"
-                                  )}>
+                                      ? 'bg-gray-100 text-gray-900'
+                                      : 'text-gray-700',
+                                    'block px-4 py-2 text-sm'
+                                  )}
+                                >
                                   Removed from pinned
                                 </a>
                               )}
@@ -187,10 +196,11 @@ function DashboardHeader({
                                   href='#'
                                   className={clsx(
                                     active
-                                      ? "bg-gray-100 text-gray-900"
-                                      : "text-gray-700",
-                                    "block px-4 py-2 text-sm"
-                                  )}>
+                                      ? 'bg-gray-100 text-gray-900'
+                                      : 'text-gray-700',
+                                    'block px-4 py-2 text-sm'
+                                  )}
+                                >
                                   Share
                                 </a>
                               )}
