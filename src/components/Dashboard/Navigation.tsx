@@ -1,5 +1,6 @@
 import { Menu } from '@headlessui/react';
 import clsx from 'clsx';
+import Link from 'next/link';
 
 import { DashboardNavLinkProps } from './Sidebar';
 
@@ -17,15 +18,20 @@ function DashboardNavLinks({ navLinks }: props) {
               return (
                 <Menu.Item key={index}>
                   {({ active }) => (
-                    <a
-                      href={link.href}
-                      className={clsx(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm'
-                      )}
-                    >
-                      {link.title}
-                    </a>
+                    <>
+                      <Link href={link.href}>
+                        <div
+                          className={clsx(
+                            active
+                              ? 'bg-gray-100 text-gray-900'
+                              : 'text-gray-700',
+                            'block px-4 py-2 text-sm'
+                          )}
+                        >
+                          {link.title}
+                        </div>
+                      </Link>
+                    </>
                   )}
                 </Menu.Item>
               );

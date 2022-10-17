@@ -1,5 +1,5 @@
 import {
-  ClockIcon,
+  CalendarIcon,
   HomeIcon,
   ViewListIcon,
 } from '@heroicons/react/outline/index';
@@ -7,9 +7,19 @@ import {
 import { colorFromSeed } from '@/utils/color';
 
 export const navigation = [
-  { name: 'Home', href: '/', icon: HomeIcon, current: true },
-  { name: 'My tasks', href: '/', icon: ViewListIcon, current: false },
-  { name: 'Recent', href: '/', icon: ClockIcon, current: false },
+  { name: 'Home', href: '/dashboard', icon: HomeIcon, current: true },
+  {
+    name: 'Trainings',
+    href: '/dashboard/trainings',
+    icon: ViewListIcon,
+    current: false,
+  },
+  {
+    name: 'Calendar',
+    href: '/dashboard/calendar',
+    icon: CalendarIcon,
+    current: false,
+  },
 ];
 export const teams = [
   { name: 'Engineering', href: '/', bgColorClass: 'bg-indigo-500' },

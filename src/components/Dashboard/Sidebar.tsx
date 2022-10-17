@@ -2,6 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { SearchIcon, SelectorIcon } from '@heroicons/react/solid/index';
 import clsx from 'clsx';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
@@ -37,16 +38,6 @@ export const dashboardNavLinks: DashboardNavLinkProps[][] = [
     {
       href: '/dashboard/notifications',
       title: 'Notifications',
-    },
-  ],
-  [
-    {
-      href: '/dashboard/desktopapp',
-      title: 'Desktop App',
-    },
-    {
-      href: '/dashboard/support',
-      title: 'Support',
     },
   ],
   [
@@ -190,28 +181,31 @@ function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           <nav className='px-3 mt-6'>
             <div className='space-y-1'>
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
-                  className={clsx(
-                    item.current
-                      ? 'bg-gray-200 text-gray-900'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
-                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                  )}
                   aria-current={item.current ? 'page' : undefined}
                 >
-                  <item.icon
+                  <div
                     className={clsx(
                       item.current
-                        ? 'text-gray-500'
-                        : 'text-gray-400 group-hover:text-gray-500',
-                      'mr-3 flex-shrink-0 h-6 w-6'
+                        ? 'bg-gray-200 text-gray-900'
+                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md cursor-pointer'
                     )}
-                    aria-hidden='true'
-                  />
-                  {item.name}
-                </a>
+                  >
+                    <item.icon
+                      className={clsx(
+                        item.current
+                          ? 'text-gray-500'
+                          : 'text-gray-400 group-hover:text-gray-500',
+                        'mr-3 flex-shrink-0 h-6 w-6'
+                      )}
+                      aria-hidden='true'
+                    />
+                    {item.name}
+                  </div>
+                </Link>
               ))}
             </div>
             <div className='mt-8'>
