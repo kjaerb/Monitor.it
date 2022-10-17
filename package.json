@@ -35,6 +35,7 @@
     "nextjs-progressbar": "^0.0.14",
     "outline": "link:@heroicons/react/outline",
     "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.13",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-query": "3.39.2",
@@ -70,8 +71,7 @@
       "prettier -w"
     ],
     "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier -w"
+      "eslint --cache --fix"
     ],
     "src/**/*.{json,css,scss,md}": [
       "prettier -w"
