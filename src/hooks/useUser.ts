@@ -1,6 +1,7 @@
-import { trpc } from '@/utils/trpc';
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
+
+import { trpc } from '@/utils/trpc';
 
 export function useUser() {
   const { data: session } = useSession();

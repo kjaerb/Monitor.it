@@ -1,13 +1,17 @@
 import { Menu, Transition } from '@headlessui/react';
+import { MenuAlt1Icon } from '@heroicons/react/outline/index';
+import { DotsVerticalIcon, SearchIcon } from '@heroicons/react/solid/index';
+import clsx from 'clsx';
 import { Session } from 'next-auth';
 import { Fragment } from 'react';
-import { MenuAlt1Icon } from '@heroicons/react/outline/index';
-import clsx from 'clsx';
-import { AvatarImage } from '@/components/ui/Image/AvatarImage';
+
 import { projects } from '@/data/dashboardData';
-import { DotsVerticalIcon, SearchIcon } from '@heroicons/react/solid/index';
-import { formatDateSimple } from '@/utils/date';
+
 import Button from '@/components/ui/Button/Button';
+import { AvatarImage } from '@/components/ui/Image/AvatarImage';
+
+import { formatDateSimple } from '@/utils/date';
+
 import DashboardNavLinks from './Navigation';
 import { dashboardNavLinks } from './Sidebar';
 

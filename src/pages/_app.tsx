@@ -2,13 +2,15 @@
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { loggerLink } from '@trpc/client/links/loggerLink';
 import { withTRPC } from '@trpc/next';
-import NextNProgress from 'nextjs-progressbar';
-import superjson from 'superjson';
-import type { AppRouter } from '@/server/router/app';
-import '@/styles/globals.css';
-import { SessionProvider } from 'next-auth/react';
 import { AppProps } from 'next/app';
 import { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
+import NextNProgress from 'nextjs-progressbar';
+import superjson from 'superjson';
+
+import '@/styles/globals.css';
+
+import type { AppRouter } from '@/server/router/app';
 
 function MyApp({
   Component,
@@ -31,7 +33,8 @@ const getBaseUrl = () => {
 };
 
 export default withTRPC<AppRouter>({
-  config({}) {
+  // eslint-disable-next-line
+  config({ ctx }) {
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr

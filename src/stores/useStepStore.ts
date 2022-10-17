@@ -1,12 +1,13 @@
+import { Figathlete } from '@prisma/client';
+import create from 'zustand';
+
 import AddUserStep from '@/components/MissingProfileInfo/AddUsersStep';
 import FigLicenseStep from '@/components/MissingProfileInfo/FigLicenseStep';
 import InformationStep from '@/components/MissingProfileInfo/InformationStep';
 import ProfileSummaryStep from '@/components/MissingProfileInfo/ProfileSummaryStep';
+
 import { Role } from '@/types/roles';
 import { Sport } from '@/types/sport';
-import { Figathlete } from '@prisma/client';
-
-import create from 'zustand';
 
 export const steps = [
   {

@@ -1,10 +1,11 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 
-import Sidebar from '@/components/Dashboard/Sidebar';
-import DashboardHeader from '@/components/Dashboard/Header';
 import { useUser } from '@/hooks/useUser';
+
+import DashboardHeader from '@/components/Dashboard/Header';
+import Sidebar from '@/components/Dashboard/Sidebar';
 import StepContainer from '@/components/MissingProfileInfo/StepContainer';
-import clsx from 'clsx';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;

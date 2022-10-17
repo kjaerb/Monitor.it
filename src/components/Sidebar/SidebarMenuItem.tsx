@@ -59,4 +59,4 @@ function SidebarMenuItemIcon({
   );
 }
 
-export { SidebarMenuItemIcon, SidebarMenuItem };
+export { SidebarMenuItem,SidebarMenuItemIcon };

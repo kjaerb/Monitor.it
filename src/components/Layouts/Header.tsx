@@ -1,6 +1,8 @@
-import { navigation, teams } from '@/data/dashboardData';
 import Link from 'next/link';
 import { useState } from 'react';
+
+import { navigation, teams } from '@/data/dashboardData';
+
 import AuthNav from '@/components/Auth/AuthNav';
 import {
   SidebarMenuItem,

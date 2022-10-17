@@ -1,9 +1,10 @@
-import { colorFromSeed } from '@/utils/color';
 import {
   ClockIcon,
   HomeIcon,
   ViewListIcon,
 } from '@heroicons/react/outline/index';
+
+import { colorFromSeed } from '@/utils/color';
 
 export const navigation = [
   { name: 'Home', href: '/', icon: HomeIcon, current: true },

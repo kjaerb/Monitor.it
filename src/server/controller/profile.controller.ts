@@ -1,6 +1,7 @@
-import { prisma } from '@/utils/prisma';
 import { Figathlete } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
+
+import { prisma } from '@/utils/prisma';
 
 export async function getProfile(email: string) {
   const user = await prisma.user.findFirst({

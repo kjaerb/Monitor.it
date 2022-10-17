@@ -1,16 +1,19 @@
-import { useUser } from '@/hooks/useUser';
 import { useState } from 'react';
-import Modal from '@/components/Modal/Modal';
 import { useStepStore } from 'stores/useStepStore';
-import InformationStep from './InformationStep';
+
+import { useUser } from '@/hooks/useUser';
+
+import Modal from '@/components/Modal/Modal';
+
 import AddUserStep from './AddUsersStep';
+import FigLicenseStep from './FigLicenseStep';
+import InformationStep from './InformationStep';
 import ProfileSummaryStep from './ProfileSummaryStep';
 import Steps from './Steps';
-import FigLicenseStep from './FigLicenseStep';
 
 function StepContainer() {
   const { user, hasProfile } = useUser();
-  const [modalOpen, setModalOpen] = useState(!hasProfile);
+  const [, setModalOpen] = useState(!hasProfile);
   const { step } = useStepStore();
 
   return (

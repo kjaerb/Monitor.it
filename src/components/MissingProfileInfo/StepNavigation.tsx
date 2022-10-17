@@ -1,6 +1,8 @@
+import { useStepStore } from 'stores/useStepStore';
+
 import { useCreateProfile } from '@/hooks/useProfile';
 import { useUpdateUserImage, useUser } from '@/hooks/useUser';
-import { useStepStore } from 'stores/useStepStore';
+
 import Button from '@/components/ui/Button/Button';
 
 interface NavigationProps {

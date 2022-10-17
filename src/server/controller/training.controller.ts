@@ -1,5 +1,6 @@
-import { prisma } from '@/utils/prisma';
 import { TRPCError } from '@trpc/server';
+
+import { prisma } from '@/utils/prisma';
 
 export async function getTrainingById(id: string) {
   return await prisma.training.findUnique({

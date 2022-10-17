@@ -1,10 +1,11 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
-import { createRouter } from '@/server/createRouter';
+
 import {
   getUserByEmail,
   updateUserImage,
 } from '@/server/controller/user.controller';
-import { TRPCError } from '@trpc/server';
+import { createRouter } from '@/server/createRouter';
 
 export const userRouter = createRouter()
   .query('getUser', {

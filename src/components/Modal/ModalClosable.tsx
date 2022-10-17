@@ -2,6 +2,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import { Fragment } from 'react';
+
 import { modalVariant } from './Modal';
 
 interface ModalProps {

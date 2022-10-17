@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import { useStepStore } from 'stores/useStepStore';
+
+import { AvatarImage } from '@/components/ui/Image/AvatarImage';
+
 import NoUser from '@/assets/img/no_user.png';
 import { formatDateSimple } from '@/utils/date';
-import clsx from 'clsx';
-import { AvatarImage } from '@/components/ui/Image/AvatarImage';
 
 interface props {
   minimal?: boolean;

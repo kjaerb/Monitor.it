@@ -1,18 +1,23 @@
-import clsx from 'clsx';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { SearchIcon, SelectorIcon } from '@heroicons/react/solid/index';
+import clsx from 'clsx';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { Fragment } from 'react';
+
+import { useGet30LatestTrainings } from '@/hooks/useTraining';
+import { useUser } from '@/hooks/useUser';
+
 import { navigation } from '@/data/dashboardData';
-import { AvatarImage } from '@/components/ui/Image/AvatarImage';
+
 import { SidebarMenuItemIcon } from '@/components/Sidebar/SidebarMenuItem';
 import SidebarMobile from '@/components/Sidebar/SidebarMobile';
+import { AvatarImage } from '@/components/ui/Image/AvatarImage';
+
 import monitorItLogo from '@/assets/img/Monitor.it-inverse.png';
-import { useUser } from '@/hooks/useUser';
-import DashboardNavLinks from './Navigation';
-import { useGet30LatestTrainings } from '@/hooks/useTraining';
 import { formatDateSimple } from '@/utils/date';
+
+import DashboardNavLinks from './Navigation';
 
 export interface DashboardNavLinkProps {
   href: string;

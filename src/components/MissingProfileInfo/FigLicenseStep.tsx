@@ -1,11 +1,14 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useStepStore } from 'stores/useStepStore';
+
+import { getFigLicense } from '@/utils/fig';
+
 import AthleteInfo from './AthleteInfo';
 import StepNavigation from './StepNavigation';
-import { getFigLicense } from '@/utils/fig';
-import { getSport } from '@/types/sport';
+
 import { Role } from '@/types/roles';
+import { getSport } from '@/types/sport';
 
 function FigLicenseStep() {
   const [hasSearched, setHasSearched] = useState(false);

@@ -1,9 +1,12 @@
-import { useUser } from '@/hooks/useUser';
-import { Role } from '@/types/roles';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useStepStore } from 'stores/useStepStore';
+
+import { useUser } from '@/hooks/useUser';
+
 import StepNavigation from './StepNavigation';
+
+import { Role } from '@/types/roles';
 import { Sport } from '@/types/sport';
 
 function InformationStep() {

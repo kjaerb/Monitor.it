@@ -1,9 +1,11 @@
 import LandingPageLayout from 'layouts/LandingPageLayout';
-import { NextPage } from 'next/types';
 import Image from 'next/image';
-import dashboardImage from '@/assets/img/dashboard.png';
-import Button from '@/components/ui/Button/Button';
+import { NextPage } from 'next/types';
 import { useSession } from 'next-auth/react';
+
+import Button from '@/components/ui/Button/Button';
+
+import dashboardImage from '@/assets/img/dashboard.png';
 
 const Home: NextPage = () => {
   const { data: session } = useSession();

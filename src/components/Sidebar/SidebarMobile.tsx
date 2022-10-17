@@ -1,9 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
 import { XIcon } from '@heroicons/react/outline/index';
 import clsx from 'clsx';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
+import { Fragment } from 'react';
 
 interface SidebarProps {
   sidebarOpen: boolean;
