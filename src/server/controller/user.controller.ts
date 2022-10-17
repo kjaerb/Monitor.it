@@ -1,4 +1,5 @@
 import { prisma } from "@/utils/prisma";
+import { TRPCError } from "@trpc/server";
 
 export async function getUserByEmail(email: string) {
   const user = await prisma.user.findFirst({
@@ -9,6 +10,26 @@ export async function getUserByEmail(email: string) {
       profile: true,
     },
   });
+
+  return user;
+}
+
+export async function updateUserImage(email: string, imageURL: string) {
+  const user = await prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      image: imageURL,
+    },
+  });
+
+  if (!user) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "User not found",
+    });
+  }
 
   return user;
 }

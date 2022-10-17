@@ -1,4 +1,5 @@
 import { useCreateProfile } from "@/hooks/useProfile";
+import { useUpdateUserImage, useUser } from "@/hooks/useUser";
 import { useStepStore } from "stores/useStepStore";
 import Button from "../ui/Button/Button";
 
@@ -17,6 +18,8 @@ function StepNavigation({
 }: NavigationProps) {
   const { incStep, decStep, role, name, sport, athlete } = useStepStore();
   const { createProfile } = useCreateProfile();
+  const { user, status } = useUser();
+  const { updateUserImage } = useUpdateUserImage();
 
   return (
     <div className='mt-4 flex justify-end'>
@@ -26,31 +29,32 @@ function StepNavigation({
         </Button>
       )}
       {finished ? (
-        <Button
-          onClick={() => {
-            if (!name || !role || !sport) {
-              return null;
-            } else {
-              createProfile({ role, sport, figAthlete: athlete });
-              setModalClose(false);
-            }
-          }}>
-          Finish
-        </Button> //Handle mutation
+        <Button onClick={() => handleOnSubmit()}>Finish</Button>
       ) : (
-        <Button
-          onClick={() => {
-            if (!onClick) {
-              incStep();
-            } else {
-              onClick();
-            }
-          }}>
-          Next
-        </Button>
+        <Button onClick={() => handleNextStep()}>Next</Button>
       )}
     </div>
   );
+
+  function handleNextStep() {
+    if (!onClick) {
+      incStep();
+    } else {
+      onClick();
+    }
+  }
+
+  function handleOnSubmit() {
+    if (!name || !role || !sport) {
+      return null;
+    } else {
+      createProfile({ role, sport, figAthlete: athlete });
+      if ((user?.image === undefined || user.image === null) && athlete) {
+        updateUserImage({ imageURL: athlete?.figImgUrl });
+      }
+      setModalClose(false);
+    }
+  }
 }
 
 export default StepNavigation;

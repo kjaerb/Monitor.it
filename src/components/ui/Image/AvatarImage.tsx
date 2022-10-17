@@ -1,3 +1,4 @@
+import { TRPCAbortError } from "@trpc/client";
 import clsx from "clsx";
 import Image from "next/image";
 import Loading from "../Loading/Loading";
@@ -6,6 +7,7 @@ interface AvatarProps {
   src?: string | null;
   alt?: string | null;
   className?: string;
+  status: "loading" | "error" | "idle" | "success";
   width?: number | string;
   height?: number | string;
 }

@@ -2,7 +2,6 @@ import { useStepStore } from "stores/useStepStore";
 import NoUser from "@/assets/img/no_user.png";
 import Image from "next/image";
 import { formatDateSimple } from "@/utils/date";
-import { FIGAthlete } from "@prisma/client";
 import clsx from "clsx";
 
 interface props {
@@ -11,7 +10,7 @@ interface props {
 }
 
 function AthleteInfo({ minimal = true, className }: props) {
-  const { athlete, role } = useStepStore();
+  const { athlete, role, sport } = useStepStore();
 
   return (
     <div
@@ -56,7 +55,7 @@ function AthleteInfo({ minimal = true, className }: props) {
               </div>
               <div className='flex justify-center items-center flex-col'>
                 <span className='font-bold'>Sport</span>
-                {athlete ? <span>{athlete?.discipline}</span> : <span>?</span>}
+                {athlete ? <span>{sport}</span> : <span>?</span>}
               </div>
               <div className='flex justify-center items-center flex-col'>
                 <span className='font-bold'>Valid to</span>
@@ -70,14 +69,16 @@ function AthleteInfo({ minimal = true, className }: props) {
             {!minimal && (
               <div className='grid grid-cols-3 divide-x-2 text-slate-700 py-2'>
                 <div className='flex justify-center items-center flex-col'>
-                  <span className='font-bold'>WIP</span>
+                  <span className='font-bold'>Coaches</span>
+                  <span>None</span>
                 </div>
                 <div className='flex justify-center items-center flex-col'>
                   <span className='font-bold'>Role</span>
                   {role && <span>{role}</span>}
                 </div>
                 <div className='flex justify-center items-center flex-col'>
-                  <span className='font-bold'>WIP</span>
+                  <span className='font-bold'>Athletes</span>
+                  <span>None</span>
                 </div>
               </div>
             )}

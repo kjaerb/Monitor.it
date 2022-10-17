@@ -17,3 +17,22 @@ export function useUser() {
     hasProfile,
   };
 }
+
+export function useUpdateUserImage() {
+  const utils = trpc.useContext();
+
+  const { mutate, isLoading, isSuccess } = trpc.useMutation(
+    "user.updateUserImage",
+    {
+      onSuccess() {
+        utils.invalidateQueries(["user.getUser"]);
+      },
+    }
+  );
+
+  return {
+    updateUserImage: mutate,
+    isLoading,
+    isSuccess,
+  };
+}
