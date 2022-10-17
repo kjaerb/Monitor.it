@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
-import Button from "@/components/ui/Button/Button";
 import { ButtonMenu } from "@/components/ui/Button/ButtonMenu";
 import { AvatarImage } from "@/components/ui/Image/AvatarImage";
+import Button from "@/components/ui/Button/Button";
 
 function AuthNav() {
   const { data: session } = useSession();
