@@ -1,7 +1,7 @@
 import { useUser } from "@/hooks/useUser";
 import { Role } from "@/types/roles";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useStepStore } from "stores/useStepStore";
 import StepNavigation from "./StepNavigation";
 import { Sport } from "@/types/sport";

@@ -1,13 +1,11 @@
-import { TRPCAbortError } from "@trpc/client";
 import clsx from "clsx";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Loading from "../Loading/Loading";
 
 interface AvatarProps {
-  src?: string | null;
+  src?: string | null | StaticImageData;
   alt?: string | null;
   className?: string;
-  status: "loading" | "error" | "idle" | "success";
   width?: number | string;
   height?: number | string;
 }
@@ -24,9 +22,9 @@ export function AvatarImage({
       {src ? (
         <Image
           src={src}
-          alt={alt ? alt : ""}
+          alt={alt ? alt : "avatar img"}
           className={clsx(
-            "m-0 flex-shrink-0 rounded-full bg-gray-300",
+            "shadow-xl object-top rounded-full w-32 h-32 object-cover",
             className
           )}
           width={width ? width : 16}

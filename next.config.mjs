@@ -25,7 +25,7 @@ export default defineNextConfig({
     domains: [
       "images.unsplash.com",
       "lh3.googleusercontent.com",
-      "https://www.gymnastics.sport",
+      "www.gymnastics.sport",
     ],
   },
 });

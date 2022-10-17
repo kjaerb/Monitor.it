@@ -15,9 +15,8 @@ export default function DashboardLayout({
   children,
   showPinned = true,
 }: DashboardLayoutProps) {
-  const { user, status, session, hasProfile } = useUser();
+  const { session } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(true);
 
   //@TODO: Add a loading state
   if (!session) {

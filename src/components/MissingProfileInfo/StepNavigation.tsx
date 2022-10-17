@@ -18,7 +18,7 @@ function StepNavigation({
 }: NavigationProps) {
   const { incStep, decStep, role, name, sport, athlete } = useStepStore();
   const { createProfile } = useCreateProfile();
-  const { user, status } = useUser();
+  const { user } = useUser();
   const { updateUserImage } = useUpdateUserImage();
 
   return (

@@ -1,8 +1,8 @@
 import { useStepStore } from "stores/useStepStore";
 import NoUser from "@/assets/img/no_user.png";
-import Image from "next/image";
 import { formatDateSimple } from "@/utils/date";
 import clsx from "clsx";
+import { AvatarImage } from "../ui/Image/AvatarImage";
 
 interface props {
   minimal?: boolean;
@@ -22,17 +22,9 @@ function AthleteInfo({ minimal = true, className }: props) {
         <div className='flex flex-wrap justify-center'>
           <div className='w-full flex justify-center -mt-16'>
             {athlete ? (
-              <img
-                src={athlete?.figImgUrl}
-                className='shadow-xl object-top rounded-full w-32 h-32 object-cover'
-              />
+              <AvatarImage src={athlete?.figImgUrl} width={128} height={128} />
             ) : (
-              <Image
-                src={NoUser}
-                width={128}
-                height={128}
-                className='shadow-xl rounded-full'
-              />
+              <AvatarImage src={NoUser} width={128} height={128} />
             )}
           </div>
         </div>

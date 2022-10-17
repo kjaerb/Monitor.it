@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createRouter } from "../createRouter";
-import { getUserByEmail } from "../controller/user.controller";
+import { getUserByEmail, updateUserImage } from "../controller/user.controller";
 import { TRPCError } from "@trpc/server";
 
 export const userRouter = createRouter()
@@ -32,5 +32,9 @@ export const userRouter = createRouter()
           message: "You must be logged in to access this resource.",
         });
       }
+
+      const user = await updateUserImage(email, imageURL);
+
+      return { user };
     },
   });

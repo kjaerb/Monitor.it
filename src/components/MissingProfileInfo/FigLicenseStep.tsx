@@ -39,7 +39,11 @@ function FigLicenseStep() {
               onChange={(e) => setFigLicense(e.target.value)}
               className={clsx(
                 "py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none  peer",
-                hasSearched && !athlete ? "border-red-500" : "border-green-500"
+                hasSearched
+                  ? !athlete
+                    ? "border-red-500"
+                    : "border-green-500"
+                  : ""
               )}
               placeholder={"Enter FIG License"}
             />
@@ -47,7 +51,11 @@ function FigLicenseStep() {
               type='submit'
               className={clsx(
                 "py-2.5 px-0 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none peer",
-                hasSearched && !athlete ? "border-red-500" : "border-green-500"
+                hasSearched
+                  ? !athlete
+                    ? "border-red-500"
+                    : "border-green-500"
+                  : ""
               )}>
               Search
             </button>

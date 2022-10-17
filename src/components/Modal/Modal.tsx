@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Dialog, Transition } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 import clsx from "clsx";
 import { Fragment } from "react";
 
@@ -18,7 +18,6 @@ interface ModalProps {
 export default function Modal({
   isOpen,
   variant = "primary",
-  setIsOpen = () => null,
   children,
 }: ModalProps) {
   return (

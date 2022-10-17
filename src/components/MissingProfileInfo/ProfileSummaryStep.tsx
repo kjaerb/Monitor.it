@@ -1,4 +1,3 @@
-import { useStepStore } from "stores/useStepStore";
 import AthleteInfo from "./AthleteInfo";
 import StepNavigation from "./StepNavigation";
 

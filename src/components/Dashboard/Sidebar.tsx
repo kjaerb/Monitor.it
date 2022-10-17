@@ -1,16 +1,12 @@
 import clsx from "clsx";
-import { Session } from "next-auth";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { SearchIcon, SelectorIcon } from "@heroicons/react/solid/index";
-import { navigation, teams } from "@/data/dashboardData";
+import { navigation } from "@/data/dashboardData";
 import { AvatarImage } from "../ui/Image/AvatarImage";
-import {
-  SidebarMenuItem,
-  SidebarMenuItemIcon,
-} from "../Sidebar/SidebarMenuItem";
+import { SidebarMenuItemIcon } from "../Sidebar/SidebarMenuItem";
 import SidebarMobile from "../Sidebar/SidebarMobile";
 import monitorItLogo from "@/assets/img/Monitor.it-inverse.png";
 import { useUser } from "@/hooks/useUser";
@@ -62,9 +58,9 @@ interface SidebarProps {
 }
 
 function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
-  const { user, status } = useUser();
+  const { user } = useUser();
   const router = useRouter();
-  const { trainings, status: trainingsStatus } = useGet30LatestTrainings();
+  const { trainings } = useGet30LatestTrainings();
 
   return (
     <>

@@ -1,9 +1,9 @@
-import { FIGAthlete } from "@prisma/client";
+import { Figathlete } from "@prisma/client";
 import axios from "axios";
 
 export async function getFigLicense(license: string) {
   return await axios
-    .get<FIGAthlete[]>(
+    .get<Figathlete[]>(
       `https://www.gymnastics.sport/api/athletes.php?function=searchLicenses&discipline=&country=&idlicense=${license}&lastname=`
     )
     .then(async (res) => {

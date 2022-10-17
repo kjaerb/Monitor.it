@@ -18,7 +18,7 @@ function StepContainer() {
       {/* Thanks to https://github.com/Fedeorlandau for the template for the modal */}
       <div className='mb-4'>
         <span className='text-white text-xl'>
-          Hi {user?.name}, we're missing some information
+          Hi {user?.name}, we&apos;re missing some information
         </span>
         <Steps currentStep={step} />
       </div>
