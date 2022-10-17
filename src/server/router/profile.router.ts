@@ -1,7 +1,10 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { createProfile, getProfile } from "../controller/profile.controller";
-import { createRouter } from "../createRouter";
+import {
+  createProfile,
+  getProfile,
+} from "@/server/controller/profile.controller";
+import { createRouter } from "@/server/createRouter";
 
 export const profileRouter = createRouter()
   .query("getProfile", {

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import React from "react";
 import { forwardRef } from "react";
-import Loading from "../Loading/Loading";
+import Loading from "@/components/ui/Loading/Loading";
 
 export const buttonColors = {
   primary: "bg-blue-600 hover:bg-blue-700 text-white",

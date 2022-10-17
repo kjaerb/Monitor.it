@@ -3,8 +3,8 @@ import { z } from "zod";
 import {
   get30LatestTrainings,
   getTrainingById,
-} from "../controller/training.controller";
-import { createRouter } from "../createRouter";
+} from "@/server/controller/training.controller";
+import { createRouter } from "@/server/createRouter";
 
 export const trainingRouter = createRouter()
   .query("getTrainingById", {

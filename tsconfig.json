@@ -26,7 +26,8 @@
       "@/layouts/*": ["layouts/*"],
       "@/server/*": ["server/*"],
       "@/data/*": ["data/*"],
-      "@/assets/*": ["assets/*"]
+      "@/assets/*": ["assets/*"],
+      "@/env/*": ["env/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],

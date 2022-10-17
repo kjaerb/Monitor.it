@@ -1,13 +1,13 @@
 import { navigation, teams } from "@/data/dashboardData";
 import Link from "next/link";
 import { useState } from "react";
-import AuthNav from "../Auth/AuthNav";
+import AuthNav from "@/components/Auth/AuthNav";
 import {
   SidebarMenuItem,
   SidebarMenuItemIcon,
-} from "../Sidebar/SidebarMenuItem";
-import SidebarMobile from "../Sidebar/SidebarMobile";
-import SidebarMobileButton from "../Sidebar/SidebarMobileButton";
+} from "@/components/Sidebar/SidebarMenuItem";
+import SidebarMobile from "@/components/Sidebar/SidebarMobile";
+import SidebarMobileButton from "@/components/Sidebar/SidebarMobileButton";
 
 function LandingPageHeader() {
   const [sidebarOpen, setSidebarOpen] = useState(false);

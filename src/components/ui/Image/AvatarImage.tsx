@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
-import Loading from "../Loading/Loading";
+import Loading from "@/components/ui/Loading/Loading";
 
 interface AvatarProps {
   src?: string | null | StaticImageData;

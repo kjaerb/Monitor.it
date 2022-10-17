@@ -1,6 +1,6 @@
 import { useUser } from "@/hooks/useUser";
 import { useState } from "react";
-import Modal from "../Modal/Modal";
+import Modal from "@/components/Modal/Modal";
 import { useStepStore } from "stores/useStepStore";
 import InformationStep from "./InformationStep";
 import AddUserStep from "./AddUsersStep";

@@ -2,7 +2,7 @@
 
 import { TRPCError } from "@trpc/server";
 import superjson from "superjson";
-import { createRouter } from "../createRouter";
+import { createRouter } from "@/server/createRouter";
 import { profileRouter } from "./profile.router";
 import { trainingRouter } from "./training.router";
 import { userRouter } from "./user.router";

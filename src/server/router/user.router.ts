@@ -1,6 +1,9 @@
 import { z } from "zod";
-import { createRouter } from "../createRouter";
-import { getUserByEmail, updateUserImage } from "../controller/user.controller";
+import { createRouter } from "@/server/createRouter";
+import {
+  getUserByEmail,
+  updateUserImage,
+} from "@/server/controller/user.controller";
 import { TRPCError } from "@trpc/server";
 
 export const userRouter = createRouter()
