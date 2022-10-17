@@ -38,6 +38,7 @@ specifiers:
   superjson: ^1.10.0
   tailwindcss: ^3.1.8
   typescript: 4.7.4
+  typescript-eslint: 0.0.1-alpha.0
   zod: ^3.18.0
   zustand: ^4.1.1
 
@@ -65,6 +66,7 @@ dependencies:
   seed-color: 2.0.1
   solid: link:@heroicons/react/solid
   superjson: 1.10.0
+  typescript-eslint: 0.0.1-alpha.0
   zod: 3.19.1
   zustand: 4.1.1_react@18.2.0
 
@@ -4917,6 +4919,13 @@ packages:
         integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==,
       }
     engines: { node: '>=8' }
+    dev: false
+
+  /typescript-eslint/0.0.1-alpha.0:
+    resolution:
+      {
+        integrity: sha512-1hNKM37dAWML/2ltRXupOq2uqcdRQyDFphl+341NTPXFLLLiDhErXx8VtaSLh3xP7SyHZdcCgpt9boYYVb3fQg==,
+      }
     dev: false
 
   /typescript/4.7.4:
