@@ -41,8 +41,9 @@ function FigLicenseStep() {
             <input
               value={figLicense}
               onChange={(e) => setFigLicense(e.target.value)}
+              type='number'
               className={clsx(
-                'py-2.5 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none  peer',
+                'py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none',
                 hasSearched
                   ? !athlete
                     ? 'border-red-500'
@@ -54,7 +55,7 @@ function FigLicenseStep() {
             <button
               type='submit'
               className={clsx(
-                'py-2.5 px-0 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none peer',
+                'py-2.5 px-0 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none',
                 hasSearched
                   ? !athlete
                     ? 'border-red-500'

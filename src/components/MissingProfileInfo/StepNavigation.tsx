@@ -1,9 +1,11 @@
 import { useStepStore } from 'stores/useStepStore';
 
 import { useCreateProfile } from '@/hooks/useProfile';
-import { useUpdateUserImage, useUser } from '@/hooks/useUser';
+import { useUpdateUserImage } from '@/hooks/useUser';
 
 import Button from '@/components/ui/Button/Button';
+
+import Loading from '../ui/Loading/Loading';
 
 interface NavigationProps {
   back?: boolean;
@@ -19,8 +21,7 @@ function StepNavigation({
   setModalClose = () => null,
 }: NavigationProps) {
   const { incStep, decStep, role, name, sport, athlete } = useStepStore();
-  const { createProfile } = useCreateProfile();
-  const { user } = useUser();
+  const { createProfile, isLoading, status } = useCreateProfile();
   const { updateUserImage } = useUpdateUserImage();
 
   return (
@@ -31,7 +32,9 @@ function StepNavigation({
         </Button>
       )}
       {finished ? (
-        <Button onClick={() => handleOnSubmit()}>Finish</Button>
+        <Button disabled={isLoading} onClick={() => handleOnSubmit()}>
+          {status === 'loading' ? <Loading /> : <>Finish</>}
+        </Button>
       ) : (
         <Button onClick={() => handleNextStep()}>Next</Button>
       )}
@@ -51,7 +54,7 @@ function StepNavigation({
       return null;
     } else {
       createProfile({ role, sport, figAthlete: athlete });
-      if ((user?.image === undefined || user.image === null) && athlete) {
+      if (athlete) {
         updateUserImage({ imageURL: athlete?.figImgUrl });
       }
       setModalClose(false);

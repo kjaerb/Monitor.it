@@ -22,7 +22,7 @@ export function useUser() {
 export function useUpdateUserImage() {
   const utils = trpc.useContext();
 
-  const { mutate, isLoading, isSuccess } = trpc.useMutation(
+  const { mutate, isLoading, isSuccess, status } = trpc.useMutation(
     'user.updateUserImage',
     {
       onSuccess() {
@@ -35,5 +35,6 @@ export function useUpdateUserImage() {
     updateUserImage: mutate,
     isLoading,
     isSuccess,
+    status,
   };
 }
