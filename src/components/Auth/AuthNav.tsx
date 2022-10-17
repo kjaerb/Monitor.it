@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { ButtonMenu } from "@/components/ui/Button/ButtonMenu";
 import { AvatarImage } from "@/components/ui/Image/AvatarImage";
-import Link from "next/link";
+import Button from "../ui/Button/Button";
 
 function AuthNav() {
   const { data: session } = useSession();
@@ -10,9 +10,7 @@ function AuthNav() {
     <div>
       {session ? (
         <>
-          <Link href={"/dashboard"}>
-            <button>Dashboard</button>
-          </Link>
+          <Button href={"/dashboard"}>Dashboard</Button>
 
           <ButtonMenu
             className='py-1'
@@ -28,9 +26,9 @@ function AuthNav() {
         </>
       ) : (
         // <Button href={"/login"}>Sign in</Button>
-        <Link href={"/dashboard"}>
-          <button onClick={() => signIn("google")}>Sign in</button>
-        </Link>
+        <Button href={"/dashboard"} onClick={() => signIn("github")}>
+          Sign in
+        </Button>
       )}
     </div>
   );
