@@ -30,3 +30,25 @@ export async function getFigImg(gymnastId: number): Promise<string> {
       return res.data;
     });
 }
+
+export async function searchFigLicense(license: string) {
+  if (!isNaN(Number(license))) {
+    return await axios
+      .get<Figathlete[]>(
+        `https://www.gymnastics.sport/api/athletes.php?function=searchLicenses&discipline=&country=&idlicense=${license}&lastname=`
+      )
+      .then(async (res) => {
+        return res.data.slice(0, 3);
+      });
+  } else {
+    const licenseSearch = license.split(' ');
+
+    return await axios
+      .get<Figathlete[]>(
+        `https://www.gymnastics.sport/api/athletes.php?function=searchLicenses&discipline=&country=&idlicense=&lastname=${licenseSearch[1]}`
+      )
+      .then(async (res) => {
+        return res.data.slice(0, 10);
+      });
+  }
+}

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { signOut } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import { useGet30LatestTrainings } from '@/hooks/useTraining';
@@ -23,6 +24,7 @@ import DashboardNavLinks from './Navigation';
 export interface DashboardNavLinkProps {
   href: string;
   title: string;
+  function?: () => void;
 }
 
 export const dashboardNavLinks: DashboardNavLinkProps[][] = [
@@ -44,6 +46,7 @@ export const dashboardNavLinks: DashboardNavLinkProps[][] = [
     {
       href: '/',
       title: 'Logout',
+      function: () => signOut(),
     },
   ],
 ];

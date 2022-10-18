@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { useStepStore } from 'stores/useStepStore';
 
-import { getFigLicense } from '@/utils/fig';
+import { getFigLicense, searchFigLicense } from '@/utils/fig';
 
 import AthleteInfo from './AthleteInfo';
 import StepNavigation from './StepNavigation';
@@ -40,8 +40,12 @@ function FigLicenseStep() {
           >
             <input
               value={figLicense}
-              onChange={(e) => setFigLicense(e.target.value)}
-              type='number'
+              onChange={async (e) => {
+                setFigLicense(e.target.value);
+                if (e.target.value.length > 2) {
+                  await searchFigLicense(e.target.value);
+                }
+              }}
               className={clsx(
                 'py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none',
                 hasSearched
@@ -50,7 +54,7 @@ function FigLicenseStep() {
                     : 'border-green-500'
                   : ''
               )}
-              placeholder={'Enter FIG License'}
+              placeholder={'Enter FIG License or Last name'}
             />
             <button
               type='submit'

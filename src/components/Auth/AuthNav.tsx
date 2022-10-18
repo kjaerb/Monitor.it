@@ -62,7 +62,7 @@ function AuthNav() {
           </>
         ) : (
           // <Button href={"/login"}>Sign in</Button>
-          <Button href={'/dashboard'} onClick={() => signIn('github')}>
+          <Button href={'/dashboard'} onClick={() => signIn('google')}>
             Sign in
           </Button>
         )}
