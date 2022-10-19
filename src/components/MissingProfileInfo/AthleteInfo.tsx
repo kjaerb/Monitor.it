@@ -9,10 +9,11 @@ import { formatDateSimple } from '@/utils/date';
 interface props {
   minimal?: boolean;
   className?: string;
+  canDelete?: boolean;
 }
 
-function AthleteInfo({ minimal = true, className }: props) {
-  const { athlete, role, sport } = useStepStore();
+function AthleteInfo({ minimal = true, className, canDelete }: props) {
+  const { athlete, role, sport, setAthlete } = useStepStore();
 
   return (
     <div
@@ -29,6 +30,35 @@ function AthleteInfo({ minimal = true, className }: props) {
             ) : (
               <AvatarImage src={NoUser} width={128} height={128} />
             )}
+            <div>
+              {canDelete && (
+                <button
+                  className={clsx(
+                    'absolute z-[100] translate-x-1/2 -translate-y-1/2 right-1/2 top-0 bg-gray-300 rounded-full bg-opacity-50	transition-opacity duration-200',
+                    athlete && 'opacity-0 hover:opacity-100 ',
+                    !athlete && 'opacity-0 cursor-default hidden'
+                  )}
+                  onClick={() => {
+                    setAthlete(undefined);
+                  }}
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-32 w-full'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='M6 18L18 6M6 6l12 12'
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className='text-center mt-2'>

@@ -40,12 +40,10 @@ interface useStepStoreProps {
   setRole: (role: Role) => void;
   sport?: Sport | string;
   setSport: (sport: Sport | string) => void;
-  name?: string;
+  name: string;
   setName: (name: string) => void;
   sharingUsers: string[];
   setSharingUsers: (users: string[]) => void;
-  figLicense: string;
-  setFigLicense: (license: string) => void;
   athlete?: Figathlete;
   setAthlete: (athlete?: Figathlete) => void;
 }
@@ -58,12 +56,10 @@ export const useStepStore = create<useStepStoreProps>((set) => ({
   setRole: (role) => set({ role }),
   sport: Sport.UNDEFINED,
   setSport: (sport) => set({ sport }),
-  name: undefined,
+  name: '',
   setName: (name) => set({ name }),
   sharingUsers: [],
   setSharingUsers: (users) => set({ sharingUsers: users }),
-  figLicense: '',
-  setFigLicense: (license) => set({ figLicense: license }),
   athlete: undefined,
   setAthlete: (athlete) => set({ athlete }),
 }));

@@ -14,17 +14,10 @@ import { getSport } from '@/types/sport';
 function FigLicenseStep() {
   const [hasSearched, setHasSearched] = useState(false);
   const [figLicenseSearch, setFigLicenseSearch] = useState<Figathlete[]>();
+  const [figLicense, setFigLicense] = useState<string>('');
 
-  const {
-    incStep,
-    setFigLicense,
-    setSport,
-    setName,
-    setRole,
-    figLicense,
-    setAthlete,
-    athlete,
-  } = useStepStore();
+  const { incStep, setSport, setName, setRole, setAthlete, athlete } =
+    useStepStore();
 
   return (
     <>
@@ -40,22 +33,7 @@ function FigLicenseStep() {
             <div className='flex'>
               <input
                 value={figLicense}
-                onChange={async (e) => {
-                  setFigLicense(e.target.value);
-                  if (e.target.value.length > 2) {
-                    await searchFigLicense(e.target.value, 10).then(
-                      (athletes) => {
-                        if (athletes && athletes.length !== 0) {
-                          setFigLicenseSearch(athletes);
-                        } else {
-                          setFigLicenseSearch(undefined);
-                        }
-                      }
-                    );
-                  } else {
-                    setFigLicenseSearch(undefined);
-                  }
-                }}
+                onChange={async (e) => handleFigLicenseInput(e)}
                 className={clsx(
                   'py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none',
                   hasSearched
@@ -89,18 +67,19 @@ function FigLicenseStep() {
             >
               {figLicenseSearch?.map((athlete, index) => {
                 return (
-                  <h1
-                    className='text-black cursor-pointer p-2'
+                  <div
+                    className='text-black cursor-pointer p-2 flex justify-between'
                     key={index}
-                    onClick={async () => {
-                      setAthlete(
-                        await getFigLicense(athlete.idgymnastlicense.toString())
-                      );
-                      setFigLicenseSearch(undefined);
-                    }}
+                    onClick={async () => handleFigLicenseInputClick(athlete)}
                   >
-                    {athlete.preferredfirstname} {athlete.preferredlastname}
-                  </h1>
+                    <p>
+                      {athlete.preferredfirstname}{' '}
+                      {transformName(athlete.preferredlastname)}
+                    </p>
+                    <span className='text-sm text-gray-600'>
+                      {athlete.country} - {athlete.idgymnastlicense}
+                    </span>
+                  </div>
                 );
               })}
             </div>
@@ -116,41 +95,71 @@ function FigLicenseStep() {
           </div>
         </div>
 
-        <AthleteInfo className=' md:mr-0' />
+        <AthleteInfo className='md:mr-0' canDelete={true} />
       </div>
       <StepNavigation onClick={incStep} />
     </>
   );
 
+  async function handleFigLicenseInputClick(athlete: Figathlete) {
+    setHasSearched(true);
+    handleSetAthlete(await getFigLicense(athlete.idgymnastlicense.toString()));
+    setFigLicense(
+      athlete.preferredfirstname +
+        ' ' +
+        transformName(athlete.preferredlastname)
+    );
+    setFigLicenseSearch(undefined);
+  }
+
+  async function handleFigLicenseInput(e: React.ChangeEvent<HTMLInputElement>) {
+    setFigLicense(e.target.value);
+    if (e.target.value.length > 2) {
+      await searchFigLicense(e.target.value, 10).then((athletes) => {
+        if (athletes && athletes.length !== 0) {
+          setFigLicenseSearch(athletes);
+        } else {
+          setFigLicenseSearch(undefined);
+        }
+      });
+    } else {
+      setFigLicenseSearch(undefined);
+    }
+  }
+
+  function handleSetAthlete(athlete?: Figathlete) {
+    if (athlete) {
+      setAthlete({
+        ...athlete,
+        preferredlastname: transformName(athlete.preferredlastname),
+        idgymnastlicense: Number(athlete.idgymnastlicense),
+        gymnastid: Number(athlete.gymnastid),
+        licensestatus: new Date(athlete.licensestatus),
+        birth: new Date(athlete.birth),
+        validto: new Date(athlete.validto),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        profileId: '',
+      });
+      setName(
+        `${athlete.preferredfirstname} ${transformName(
+          athlete.preferredlastname
+        )}`
+      );
+      setSport(getSport(athlete.discipline));
+      setRole(Role.ATHLETE);
+    } else {
+      setAthlete(undefined);
+      setName('');
+      setSport(getSport(''));
+      setRole(Role.UNDEFINED);
+    }
+  }
+
   async function handleFigLicenseSearch(e: React.FormEvent) {
     e.preventDefault();
     await getFigLicense(figLicense).then((athlete) => {
-      if (athlete) {
-        setAthlete({
-          ...athlete,
-          preferredlastname: transformName(athlete.preferredlastname),
-          idgymnastlicense: Number(athlete.idgymnastlicense),
-          gymnastid: Number(athlete.gymnastid),
-          licensestatus: new Date(athlete.licensestatus),
-          birth: new Date(athlete.birth),
-          validto: new Date(athlete.validto),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          profileId: '',
-        });
-        setName(
-          `${athlete.preferredfirstname} ${transformName(
-            athlete.preferredlastname
-          )}`
-        );
-        setSport(getSport(athlete.discipline));
-        setRole(Role.ATHLETE);
-      } else {
-        setAthlete(undefined);
-        setName('');
-        setSport(getSport(''));
-        setRole(Role.UNDEFINED);
-      }
+      handleSetAthlete(athlete);
     });
     setHasSearched(true);
   }

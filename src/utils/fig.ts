@@ -42,6 +42,8 @@ export async function searchFigLicense(license: string, slice: number) {
       if (licenseSearch[1] && licenseSearch[1].length > 1) {
         return await queryFigLicenseByName(slice, licenseSearch[1]);
       }
+    } else {
+      return undefined;
     }
   }
 }
