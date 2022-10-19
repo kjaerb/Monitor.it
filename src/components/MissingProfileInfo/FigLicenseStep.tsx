@@ -1,3 +1,4 @@
+import { Figathlete } from '@prisma/client';
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useStepStore } from 'stores/useStepStore';
@@ -12,6 +13,7 @@ import { getSport } from '@/types/sport';
 
 function FigLicenseStep() {
   const [hasSearched, setHasSearched] = useState(false);
+  const [figLicenseSearch, setFigLicenseSearch] = useState<Figathlete[]>();
 
   const {
     incStep,
@@ -26,49 +28,82 @@ function FigLicenseStep() {
 
   return (
     <>
-      <div className='flex text-white flex-col md:flex-row  justify-center items-center'>
-        <div className='flex flex-col w-full md:w-1/2 mr-2 mb-8 md:mb-0 px-1'>
+      <div className='flex text-white flex-col md:flex-row  justify-center'>
+        <div className='flex flex-col w-full md:w-1/2 mr-2 mb-8 md:mb-0 px-1 mt-16'>
           <label htmlFor='underline_select' className='sr-only'>
             Underline select
           </label>
           <label className='text-white'>
             If you have a FIG license, please enter below
           </label>
-          <form
-            className='flex'
-            onSubmit={async (e) => handleFigLicenseSearch(e)}
-          >
-            <input
-              value={figLicense}
-              onChange={async (e) => {
-                setFigLicense(e.target.value);
-                if (e.target.value.length > 2) {
-                  await searchFigLicense(e.target.value);
-                }
-              }}
+          <form onSubmit={async (e) => handleFigLicenseSearch(e)}>
+            <div className='flex'>
+              <input
+                value={figLicense}
+                onChange={async (e) => {
+                  setFigLicense(e.target.value);
+                  if (e.target.value.length > 2) {
+                    await searchFigLicense(e.target.value, 10).then(
+                      (athletes) => {
+                        if (athletes && athletes.length !== 0) {
+                          setFigLicenseSearch(athletes);
+                        } else {
+                          setFigLicenseSearch(undefined);
+                        }
+                      }
+                    );
+                  } else {
+                    setFigLicenseSearch(undefined);
+                  }
+                }}
+                className={clsx(
+                  'py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none',
+                  hasSearched
+                    ? !athlete
+                      ? 'border-red-500'
+                      : 'border-green-500'
+                    : ''
+                )}
+                placeholder={'Enter FIG License or Last name'}
+              />
+
+              <button
+                type='submit'
+                className={clsx(
+                  'py-2.5 px-0 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none',
+                  hasSearched
+                    ? !athlete
+                      ? 'border-red-500'
+                      : 'border-green-500'
+                    : ''
+                )}
+              >
+                Search
+              </button>
+            </div>
+            <div
               className={clsx(
-                'py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none',
-                hasSearched
-                  ? !athlete
-                    ? 'border-red-500'
-                    : 'border-green-500'
-                  : ''
-              )}
-              placeholder={'Enter FIG License or Last name'}
-            />
-            <button
-              type='submit'
-              className={clsx(
-                'py-2.5 px-0 text-sm  bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none',
-                hasSearched
-                  ? !athlete
-                    ? 'border-red-500'
-                    : 'border-green-500'
-                  : ''
+                figLicenseSearch ? 'block' : 'hidden',
+                'bg-white w-full max-h-28 shadow-lg rounded-b-md overflow-y-scroll'
               )}
             >
-              Search
-            </button>
+              {figLicenseSearch?.map((athlete, index) => {
+                return (
+                  <h1
+                    className='text-black cursor-pointer p-2'
+                    key={index}
+                    onClick={async () => {
+                      setAthlete(
+                        await getFigLicense(athlete.idgymnastlicense.toString())
+                      );
+                      setFigLicenseSearch(undefined);
+                    }}
+                  >
+                    {athlete.preferredfirstname} {athlete.preferredlastname}
+                  </h1>
+                );
+              })}
+            </div>
           </form>
           <div>
             <span className='text-red-500'>
