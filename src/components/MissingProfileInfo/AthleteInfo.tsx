@@ -34,7 +34,7 @@ function AthleteInfo({ minimal = true, className, canDelete }: props) {
               {canDelete && (
                 <button
                   className={clsx(
-                    'absolute z-[100] translate-x-1/2 -translate-y-1/2 right-1/2 top-0 bg-gray-300 rounded-full bg-opacity-50	transition-opacity duration-200',
+                    'absolute z-[100] translate-x-1/2 -translate-y-1/2 right-1/2 top-0 bg-gray-700 rounded-full bg-opacity-50	transition-opacity duration-200',
                     athlete && 'opacity-0 hover:opacity-100 ',
                     !athlete && 'opacity-0 cursor-default hidden'
                   )}

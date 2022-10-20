@@ -65,25 +65,9 @@ function FigLicenseStep() {
                 'bg-white w-full max-h-28 shadow-lg rounded-b-md overflow-y-scroll'
               )}
             >
-              {figLicenseSearch?.map((athlete, index) => {
-                return (
-                  <div
-                    className='text-black cursor-pointer p-2 flex justify-between'
-                    key={index}
-                    onClick={async () => handleFigLicenseInputClick(athlete)}
-                  >
-                    <p>
-                      {athlete.preferredfirstname}{' '}
-                      {getHighlightedText(
-                        transformName(athlete.preferredlastname)
-                      )}
-                    </p>
-                    <span className='text-sm text-gray-600'>
-                      {athlete.country} - {athlete.idgymnastlicense}
-                    </span>
-                  </div>
-                );
-              })}
+              {figLicenseSearch?.map((athlete, index) =>
+                showOnlyFullSearch(athlete, index)
+              )}
             </div>
           </form>
           <div>
@@ -117,7 +101,7 @@ function FigLicenseStep() {
   async function handleFigLicenseInput(e: React.ChangeEvent<HTMLInputElement>) {
     setFigLicense(e.target.value);
     if (e.target.value.length > 2) {
-      await searchFigLicense(e.target.value, 10).then((athletes) => {
+      await searchFigLicense(e.target.value, 20).then((athletes) => {
         if (athletes && athletes.length !== 0) {
           setFigLicenseSearch(athletes);
         } else {
@@ -129,6 +113,30 @@ function FigLicenseStep() {
     }
   }
 
+  function showOnlyFullSearch(athlete: Figathlete, index: number) {
+    if (
+      `${athlete.preferredfirstname.toLocaleLowerCase()} ${athlete.preferredlastname.toLocaleLowerCase()}`.includes(
+        figLicense.toLocaleLowerCase()
+      )
+    ) {
+      return (
+        <div
+          className='text-black cursor-pointer p-2 flex justify-between'
+          key={index}
+          onClick={async () => handleFigLicenseInputClick(athlete)}
+        >
+          <p>
+            {athlete.preferredfirstname}{' '}
+            {getHighlightedText(transformName(athlete.preferredlastname))}
+          </p>
+          <span className='text-sm text-gray-600'>
+            {athlete.country} - {athlete.idgymnastlicense}
+          </span>
+        </div>
+      );
+    }
+  }
+
   function getHighlightedText(text: string) {
     // Split text on highlight term, include term itself into parts, ignore case
     const split = figLicense.split(' ');
@@ -137,8 +145,12 @@ function FigLicenseStep() {
       const parts = text.split(new RegExp(`(${str})`, 'gi'));
       return (
         <span>
-          {parts.map((part) =>
-            part.toLowerCase() === str.toLowerCase() ? <b>{part}</b> : part
+          {parts.map((part, index) =>
+            part.toLowerCase() === str.toLowerCase() ? (
+              <b key={index}>{part}</b>
+            ) : (
+              part
+            )
           )}
         </span>
       );
