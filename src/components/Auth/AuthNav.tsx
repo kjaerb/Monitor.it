@@ -1,4 +1,4 @@
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 import { ButtonMenu } from '@/components/ui/Button/ButtonMenu';
@@ -30,11 +30,8 @@ function AuthNav() {
             </div>
           ) : (
             <>
-              <Button className='w-full' onClick={() => signIn('google')}>
-                Login
-              </Button>
-              <Button variant='light' className='w-full mt-4'>
-                Sign up
+              <Button className='font-bold w-full' href={'/login'}>
+                Sign in
               </Button>
             </>
           )}

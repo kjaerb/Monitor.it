@@ -26,6 +26,7 @@ export default defineNextConfig({
       'images.unsplash.com',
       'lh3.googleusercontent.com',
       'www.gymnastics.sport',
+      'avatars.githubusercontent.com',
     ],
   },
 });
