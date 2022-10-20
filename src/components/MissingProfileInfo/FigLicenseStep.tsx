@@ -14,7 +14,7 @@ import { getSport } from '@/types/sport';
 function FigLicenseStep() {
   const [hasSearched, setHasSearched] = useState(false);
   const [figLicenseSearch, setFigLicenseSearch] = useState<Figathlete[]>();
-  const [figLicense, setFigLicense] = useState<string>('');
+  const [figLicense, setFigLicense] = useState('');
 
   const { incStep, setSport, setName, setRole, setAthlete, athlete } =
     useStepStore();
@@ -74,7 +74,9 @@ function FigLicenseStep() {
                   >
                     <p>
                       {athlete.preferredfirstname}{' '}
-                      {transformName(athlete.preferredlastname)}
+                      {getHighlightedText(
+                        transformName(athlete.preferredlastname)
+                      )}
                     </p>
                     <span className='text-sm text-gray-600'>
                       {athlete.country} - {athlete.idgymnastlicense}
@@ -124,6 +126,28 @@ function FigLicenseStep() {
       });
     } else {
       setFigLicenseSearch(undefined);
+    }
+  }
+
+  function getHighlightedText(text: string) {
+    // Split text on highlight term, include term itself into parts, ignore case
+    const split = figLicense.split(' ');
+
+    function returnHighlight(str: string) {
+      const parts = text.split(new RegExp(`(${str})`, 'gi'));
+      return (
+        <span>
+          {parts.map((part) =>
+            part.toLowerCase() === str.toLowerCase() ? <b>{part}</b> : part
+          )}
+        </span>
+      );
+    }
+
+    if (split[0] && split.length === 1) {
+      return returnHighlight(split[0]);
+    } else if (split[1] && split.length > 1) {
+      return returnHighlight(split[1]);
     }
   }
 
