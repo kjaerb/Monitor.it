@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useStepStore } from 'stores/useStepStore';
 
 import { useCreateProfile } from '@/hooks/useProfile';
@@ -5,6 +6,7 @@ import { useUpdateUserImage } from '@/hooks/useUser';
 
 import Button from '@/components/ui/Button/Button';
 
+import { FigImageModal } from './FigImageModal';
 import Loading from '../ui/Loading/Loading';
 
 interface NavigationProps {
@@ -23,6 +25,7 @@ function StepNavigation({
   const { incStep, decStep, role, name, sport, athlete } = useStepStore();
   const { createProfile, isLoading, status } = useCreateProfile();
   const { updateUserImage } = useUpdateUserImage();
+  const [imgModal, setImgModal] = useState(false);
 
   return (
     <div className='mt-4 flex justify-end'>
@@ -38,6 +41,11 @@ function StepNavigation({
       ) : (
         <Button onClick={() => handleNextStep()}>Next</Button>
       )}
+      <FigImageModal
+        isOpen={imgModal}
+        setIsOpen={setImgModal}
+        handleInnerSubmit={handleInnerSubmit}
+      />
     </div>
   );
 
@@ -50,13 +58,23 @@ function StepNavigation({
   }
 
   function handleOnSubmit() {
+    if (athlete?.figImgUrl) {
+      setImgModal(true);
+    } else {
+      handleInnerSubmit(false);
+    }
+  }
+
+  function handleInnerSubmit(useFigImg: boolean) {
+    setImgModal(false);
     if (!name || !role || !sport) {
       return null;
     } else {
       createProfile({ role, sport, figAthlete: athlete });
-      if (athlete) {
+      useFigImg &&
+        athlete?.figImgUrl &&
         updateUserImage({ imageURL: athlete?.figImgUrl });
-      }
+
       setModalClose(false);
     }
   }

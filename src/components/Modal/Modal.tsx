@@ -10,7 +10,7 @@ export const modalVariant = {
 
 interface ModalProps {
   isOpen: boolean;
-  variant: keyof typeof modalVariant;
+  variant?: keyof typeof modalVariant;
   setIsOpen: (isOpen: boolean) => void;
   children?: React.ReactNode;
 }

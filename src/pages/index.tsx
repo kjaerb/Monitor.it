@@ -4,47 +4,16 @@ import { NextPage } from 'next/types';
 import { useSession } from 'next-auth/react';
 
 import Button from '@/components/ui/Button/Button';
+import { OAuthErrorModal } from '@/components/ui/Modals/OAuthErrorModal';
 
 import dashboardImage from '@/assets/img/dashboard.png';
-import { useRouter } from 'next/router';
-import Modal from '@/components/Modal/Modal';
-import { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
-  const router = useRouter();
   const { data: session } = useSession();
-
-  const [errorModal, setErrorModal] = useState(false);
-
-  useEffect(() => {
-    router.query.error === 'OAuthAccountNotLinked' && setErrorModal(true);
-  }, [router.isReady]);
 
   return (
     <LandingPageLayout>
-      <Modal isOpen={errorModal} variant={'inverted'} setIsOpen={setErrorModal}>
-        <div className='flex flex-col'>
-          <h1 className='font-bold text-2xl'>Error</h1>
-          <div>
-            <p className='text-lg'>
-              There appears to be an account already linked with this email. Try
-              another provider
-            </p>
-          </div>
-          <div className='self-end'>
-            <Button
-              className='w-content mr-2'
-              variant='light'
-              onClick={() => setErrorModal(false)}
-            >
-              Close
-            </Button>
-            <Button className='w-content' onClick={() => router.push('/login')}>
-              Sign in again
-            </Button>
-          </div>
-        </div>
-      </Modal>
+      <OAuthErrorModal />
       <section className='mx-auto flex justify-center items-center flex-col w-screen bg-gradient-to-b from-blue-600 to-blue-500'>
         <div className='flex pt-32 md:pt-64 pb-32 mb-2 max-w-5xl w-screen justify-between px-4 lg:px-0 flex-col md:flex-row'>
           <div className='py-10 '>
