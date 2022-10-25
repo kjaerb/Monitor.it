@@ -4,7 +4,6 @@ import FacebookProvider from 'next-auth/providers/facebook';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import InstagramProvider from 'next-auth/providers/instagram';
-
 import { prisma } from '@/utils/prisma';
 
 export const authOptions: NextAuthOptions = {
@@ -33,6 +32,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
     }),
   ],
+
   pages: {
     signIn: '/',
   },

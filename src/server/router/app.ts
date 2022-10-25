@@ -8,6 +8,7 @@ import { createRouter } from '@/server/createRouter';
 import { profileRouter } from './profile.router';
 import { trainingRouter } from './training.router';
 import { userRouter } from './user.router';
+import { useRouter } from 'next/router';
 
 export const appRouter = createRouter()
   .query('getSession', {
@@ -21,6 +22,7 @@ export const appRouter = createRouter()
     if (!ctx.session) {
       throw new TRPCError({ code: 'UNAUTHORIZED' });
     }
+
     return next();
   })
   .transformer(superjson)

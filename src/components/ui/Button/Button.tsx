@@ -17,6 +17,7 @@ export const buttonColors = {
   info: 'bg-blue-500 hover:bg-blue-700 text-white',
   light: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
   dark: 'bg-gray-800 hover:bg-gray-900 text-white',
+  white: 'bg-white hover:bg-gray-200 text-gray-800',
   disabled: 'bg-gray-300 text-gray-800 cursor-not-allowed',
 };
 

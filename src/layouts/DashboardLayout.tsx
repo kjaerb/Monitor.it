@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import { useState } from 'react';
-
-import { useUser } from '@/hooks/useUser';
+import { useEffect, useState } from 'react';
 
 import DashboardHeader from '@/components/Dashboard/Header';
 import Sidebar from '@/components/Dashboard/Sidebar';
 import StepContainer from '@/components/MissingProfileInfo/StepContainer';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -16,13 +16,16 @@ export default function DashboardLayout({
   children,
   showPinned = true,
 }: DashboardLayoutProps) {
-  const { session } = useUser();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { data: session, status } = useSession();
 
-  //@TODO: Add a loading state
-  if (!session) {
-    return null;
-  }
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status !== 'loading' && status === 'unauthenticated') {
+      router.push('/login');
+    }
+  }, [status]);
 
   return (
     <>
@@ -38,11 +41,13 @@ export default function DashboardLayout({
         {/* Main column */}
         <div className='lg:pl-64 flex flex-col'>
           {/* Search header */}
-          <DashboardHeader
-            setSidebarOpen={setSidebarOpen}
-            session={session}
-            showPinned={showPinned}
-          />
+          {session && (
+            <DashboardHeader
+              setSidebarOpen={setSidebarOpen}
+              session={session}
+              showPinned={showPinned}
+            />
+          )}
           <main
             className={clsx(
               'flex-1 mt-8',

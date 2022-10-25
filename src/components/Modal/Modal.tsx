@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { Fragment } from 'react';
 
 export const modalVariant = {
-  primary: 'bg-black',
+  primary: 'bg-black text-white',
   inverted: 'bg-white',
 };
 

@@ -24,8 +24,6 @@ export function AvatarImage({
         <Image
           src={src}
           alt={alt ? alt : 'avatar img'}
-          placeholder='blur'
-          blurDataURL={`/_next/image?url=%2F${src}?w%3D150&q%3D75`}
           className={clsx(
             'shadow-xl object-top rounded-full w-32 h-32 object-cover',
             className
